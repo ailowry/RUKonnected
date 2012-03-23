@@ -1,0 +1,31 @@
+#login-form {
+    background-color: gray;
+    display: inline-block;
+    padding: 20px;
+    -moz-border-radius: 9px;
+    border-radius: 9px;
+}
+#login-form input[type='text'] {
+    height: 16px;
+    padding: 1px;
+    border-width: 2px;
+    margin: 2px;
+    float: left;
+    clear: right;
+}
+#login-form input[type='submit'] {
+    float: right;
+    clear: both;
+}
+#login-form label {
+    height: 20px;
+    margin-top: 3px;
+    width: 70px;
+    float: left;
+    clear: left;
+}
+.clear {
+    clear: both;
+    width: 1px;
+    height: 1px;
+}
