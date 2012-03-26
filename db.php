@@ -1,10 +1,7 @@
 <?php
-$host = "50.57.138.7";
-$username = "rubook";
-$password = "teamsara";
-$dbname = "rubook";
+require('./config.php');
 
-$db = mysql_connect($host, $username, $password);
+$db = mysql_connect($dbhost, $dbusername, $dbpassword);
 mysql_select_db($dbname);
 
 if(mysql_errno()) {
