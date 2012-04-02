@@ -53,7 +53,7 @@
         $qStr = "SELECT * FROM Messages WHERE (UserID = $userid "
                 . "OR FriendID = $userid)";
         $result = mysql_query($qStr);
-        return mysql_fetch_assoc($result);
+        return fetchAllRows($result);
     }
 
     /**
