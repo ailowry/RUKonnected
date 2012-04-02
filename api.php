@@ -25,7 +25,6 @@
         if($action == 'getMessages') {
             $response = getMessages($userid);
         }
-        // This will be moved into a POST request later
         else if($action == 'makePost') {
             if($input['friendID']) {
                 $response = makePost($userid, $input['content'], $input['friendID']);
