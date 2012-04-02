@@ -78,8 +78,7 @@
             $qStr = "INSERT INTO Posts(UserID, PostContent, Time) "
                     . "VALUES($userid_v, '$text_v', NOW())";
         }
-        $result = mysql_query($qStr);
-        return mysql_fetch_assoc($result);
+        return mysql_query($qStr) ? true : mysql_error;
     }
 
     /**
