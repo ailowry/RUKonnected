@@ -33,7 +33,6 @@
             else {
                 $response = makePost($userid, $input['content']);
             }
-            echo mysql_error();
         }
         else {
             $err = 'Error: Improper api call';
