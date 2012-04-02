@@ -36,6 +36,9 @@
         else if($action == 'getFeed') {
             $response = getFeed($userid);
         }
+        else if($action == 'makeFriendRequest') {
+            $response = makeFriendRequest($userid, $input['friendid']);
+        }
         else {
             $err = 'Error: Improper api call';
         }
@@ -100,6 +103,20 @@
                  . "OR FriendUserID = $friendsRegex";
         $result2 = mysql_query($qStr2);
         return fetchAllRows($result2);
+    }
+
+    /**
+     * Sends a friend request
+     * @param $userid ID of user sending request
+     * @param $friendid ID of friend recieving request
+     * @return Returns true on success, an error on failure
+     */
+    function makeFriendRequest($userid, $friendid) {
+        $userid_v = (int)$userid;
+        $friendid_v = (int)$friendid;
+        $qStr = "INSERT INTO FriendRequests(UserID, FriendID, Time) "
+                . "VALUES($userid_v, $friendid_v, NOW())";
+        return mysql_query($qStr) ? true : mysql_error;
     }
 
     /**
