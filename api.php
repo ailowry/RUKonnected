@@ -26,7 +26,7 @@
             $response = getMessages($userid);
         }
         else if($action == 'makePost') {
-            if($input['friendID']) {
+            if($input['friendid']) {
                 $response = makePost($userid, $input['content'], $input['friendid']);
             }
             else {
