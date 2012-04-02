@@ -27,5 +27,4 @@
     </form>
     Response: <div id="response" style='background-color: lightBlue;'>---</div>
 </body>
-</head>
 </html>
