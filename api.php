@@ -33,6 +33,9 @@
                 $response = makePost($userid, $input['content']);
             }
         }
+        else if($action == 'getFeed') {
+            $response = getFeed($userid);
+        }
         else {
             $err = 'Error: Improper api call';
         }
@@ -74,5 +77,41 @@
         }
         $result = mysql_query($qStr);
         return mysql_fetch_assoc($result);
+    }
+
+    /**
+     * Gets all posts that user, or a friend of that user, has made or recieved
+     * @param $userid The userid of the user
+     * @return An array of posts that user or friend of user made or recieved
+     */
+    function getFeed($userid) {
+        $userid_v = (int)$userid;
+        $qStr = "SELECT * FROM Friends WHERE UserID = $userid_v";
+        $result = mysql_query($qStr);
+        $friends = array();
+        $friendsRegex = "($userid_v)";
+        foreach($result as $row) {
+            $fid = $row['FriendID'];
+            $friends.push($fid);
+            $friendsRegex .= "|($fid)";
+        }
+
+        $qStr2 = "SELECT * FROM Posts WHERE UserID REGEXP $friendsRegex "
+                 . "OR FriendUserID = $friendsRegex";
+        $result2 = mysql_query($qStr2);
+        return fetchAllRows($result2);
+    }
+
+    /**
+     * Fetches all rows from a database result
+     * @param $result the database result object to fetch rows from
+     * @return An Assoc array of results rows
+     */
+    function fetchAllRows($result) {
+        $rows = array();
+        while($row = mysql_fetch_assoc($result)) {
+            $rows[] = $row;
+        }
+        return $rows;
     }
 ?>
