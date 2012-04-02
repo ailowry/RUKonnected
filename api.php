@@ -52,9 +52,9 @@
      * @return An array of messages the user has sent or recieved
      */
     function getMessages($userid) {
-        $userid = (int)$userid;
-        $qStr = "SELECT * FROM Messages WHERE (UserID = $userid "
-                . "OR FriendID = $userid)";
+        $userid_v = (int)$userid;
+        $qStr = "SELECT * FROM Messages WHERE (UserID = $userid_v "
+                . "OR FriendID = $userid_v)";
         $result = mysql_query($qStr);
         return fetchAllRows($result);
     }
