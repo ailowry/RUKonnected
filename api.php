@@ -27,7 +27,7 @@
         }
         else if($action == 'makePost') {
             if($input['friendID']) {
-                $response = makePost($userid, $input['content'], $input['friendID']);
+                $response = makePost($userid, $input['content'], $input['friendid']);
             }
             else {
                 $response = makePost($userid, $input['content']);
