@@ -39,6 +39,9 @@
         else if($action == 'makeFriendRequest') {
             $response = makeFriendRequest($userid, $input['friendid']);
         }
+        else if($action == 'likePost') {
+            $response = likePost($userid, $input['postid']);
+        }
         else {
             $err = 'Error: Improper api call';
         }
@@ -115,6 +118,20 @@
         $friendid_v = (int)$friendid;
         $qStr = "INSERT INTO FriendRequests(UserID, FriendID, Time) "
                 . "VALUES($userid_v, $friendid_v, NOW())";
+        return mysql_query($qStr) ? true : mysql_error;
+    }
+
+    /**
+     * Like a post
+     * @param $userid the user liking the post
+     * @param $postid the post to like
+     * $return true if successful, error if not succesful
+     */
+    function likePost($userid, $postid) {
+        $userid_v = (int)$userid;
+        $postid_v = (int)$postid;
+        $qStr = "INSERT INTO Likes(UserID, PostID, Time) "
+            . "VALUES($userid_v, $postid_v, NOW())";
         return mysql_query($qStr) ? true : mysql_error;
     }
 
