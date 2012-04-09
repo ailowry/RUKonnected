@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="RUCstyles.css"/>
+<title>RUConnected - Login</title>
+</head>
+
+<body>
+	<!-- Header division with table containing main title and login form -->
+    <div class="header">
+    	<form name="login" action="#" method="post">
+        	<table width="100%" cellpadding="5px">
+        		<tr>
+        			<td width="270px"><h1>R.U. Connected</h1></td>
+                    <td width="auto">&nbsp;</td>
+                    <td width="240px">Login Name: <input type="text" name="logname" /></td>
+                    <td width="225px">Password: <input type="text" name="pword" /></td>
+                    <td width="20px"><input type="submit" name="submit" value="submit" /></td>
+            	</tr>
+			</table>
+        </form>
+	</div>
+    
+    <!-- main container div to hold 2-3 columns of information -->
+<div class="container">
+    	<!-- Left Sidebar div to contain personal information or simple image display; floated to the left -->
+        <div class="leftSB">&nbsp;</div>
+        
+        <!-- Right Sidebar div to contain future functionality such as search or grouping functions; floated to the right -->
+        <div class="rightSB">&nbsp;</div>
+        
+<!-- Main content div -->
+        <div class="content">
+        	<h2>Welcome to R.U. Connected!</h2>
+            <hr />
+            <h3>If you do not already have an R.U. Connected account, you can register for one here.</h3>
+            <form name="registration" method="post" action="#">
+            	<table align="center" style="background-color:#F00; color:#FFF;">
+                	<tr>
+                    	<td width="138">Email Address: </td>
+                        <td width="179"><input type="text" name="userID" value="" /></td>
+                    </tr>
+                    <tr>
+                    	<td>Password: </td>
+                        <td><input type="password" name="userID" value="" /></td>
+                    </tr>
+                    <tr>
+                    	<td>Confirm Password: </td>
+                        <td><input type="password" name="userID" value="" /></td>
+                    </tr>
+                    <tr>
+                    	<td>Your Birthdate: </td>
+                        <td>
+                        	<select name="month">
+                            	<option value="Jan">Jan</option>
+                                <option value="Feb">Feb</option>
+                                <option value="Mar">Mar</option>
+                                <option value="Apr">Apr</option>
+                            </select>
+                            
+                            <select name="date">
+                            	<option value="01">01</option>
+                                <option value="02">02</option>
+                                <option value="16">16</option>
+                                <option value="27">27</option>
+                            </select>
+                            
+                            <select name="year">
+                            	<option value="1969">1969</option>
+                                <option value="1988">1988</option>
+                                <option value="2000">2000</option>
+                                <option value="2006">2006</option>
+                            </select>
+						</td>
+                    </tr>
+                    <tr>
+                    	<td colspan="2"><a href="#">Why do we ask for your birth date?</a>
+                    </tr>
+                    <tr>
+                    	<td><input type="submit" value="Register" /></td>
+                        <td><input type="reset" value="Clear Form" /></td>
+                    </tr>
+                </table>
+            </form>
+            <hr />
+			<div class="footer">Created by Brad Haga for the ARAS Group on 04/06/2012</div>
+      </div>
+      
+    </div>
+</body>
+</html>

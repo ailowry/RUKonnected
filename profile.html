@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="RUCstyles.css"/>
+<title>RUConnected - Login</title>
+</head>
+
+<body>
+	<!-- Header division with table containing main title and login form -->
+    <div class="header">
+    	<form name="login" action="#" method="post">
+        	<table width="100%" cellpadding="5px">
+        		<tr>
+        			<td width="270px"><h1>R.U. Connected</h1></td>
+                    <td width="auto">&nbsp;</td>
+                    <td width="240px">Login Name: <input type="text" name="logname" /></td>
+                    <td width="225px">Password: <input type="text" name="pword" /></td>
+                    <td width="20px"><input type="submit" name="submit" value="submit" /></td>
+            	</tr>
+			</table>
+        </form>
+	</div>
+    
+    <!-- main container div to hold 2-3 columns of information -->
+<div class="container">
+    	<!-- Left Sidebar div to contain personal information or simple image display; floated to the left -->
+        <div class="leftSB">
+        <!-- Table to display user profile information -->
+        	<table>
+        		<tr>
+            		<td colspan="2"><img alt="Client Photo Here" name="myPhoto" width="100" height="100" style="background-color: #FF0000" /><br/></td>
+            	</tr>
+        		<tr>
+            		<td>Name: </td>
+                	<td>$userName</td>
+            	</tr>
+            	<tr>
+            		<td>Age: </td>
+					<td>$userAge</td>
+            	</tr>
+            	<tr>
+            		<td>Location: </td>
+               	 	<td>$location</td>
+            	</tr>
+                <tr>
+            		<td>Mood: </td>
+              	  <td>$mood</td>
+            	</tr>
+        	</table>
+            <br />
+			<ul class="nav">
+            	<li><a href="#">R.U. Wall</a></li>
+                <li><a href="#">Notes</a></li>
+                <li><a href="#">Images</a></li>
+                <li><a href="#">Profile</a></li>
+            </ul>
+		</div>
+        
+        <!-- Right Sidebar div to contain future functionality such as search or grouping functions; floated to the right -->
+        <div class="rightSB">
+        	<p>This column will contain a variety of later functionality ranging from ad-space to a search box for finding specific users to grouping tools enabling the user to find similar names or interests quickly.</p>
+        </div>
+        
+<!-- Main content div -->
+        <div class="content">
+        	<h2>Welcome to R.U. Connected $userName!</h2>
+            <hr />
+			<form name="editProfile" method="post" action="#">
+            	<h2>Edit Profile</h2>
+                <table>
+                	<tr>
+                    	<td>Username:</td>
+                        <td colspan="2"><input name="usrName" value="$userName" /></td>
+                    </tr>
+                    <tr>
+                    	<td>Old Password:</td>
+                        <td colspan="2"><input name="oldPwd" value="" /></td>
+                    </tr>
+                    <tr>
+                    	<td>New Password:</td>
+                        <td colspan="2"><input name="newPwd" value="" /></td>
+                    </tr>
+                    <tr><td colspan="3">&nbsp;</td></tr>
+                    <tr>
+                    	<td><img name="avatar" src="" width="48" height="48" alt="userAvatar" style="background-color: #FF0000" /></td>
+                        <td><input type="file" name="avatarURL" value="$avatarURL" /></td>
+                    </tr>
+                    <tr>
+                    	<td>Birthdate</td>
+                        <td>
+                        	<select name="month">
+                            	<option value="1">Jan</option>
+                                <option value="2">Feb</option>
+                                <option value="3">Mar</option>
+                                <option value="4">Apr</option>
+							</select>
+						
+                        	<select name="date">
+                            	<option value="1">01</option>
+                                <option value="2">02</option>
+                                <option value="3">03</option>
+                                <option value="4">04</option>
+							</select>
+						
+                        	<select name="year">
+                            	<option value="1969">1969</option>
+                                <option value="1988">1988</option>
+                                <option value="2000">2000</option>
+                                <option value="2006">2006</option>
+							</select>
+						</td>
+                    </tr>
+                    <tr>
+                    	<td>Location:</td>
+                        <td><input type="text" name="location" value="$location"/></td>
+                    </tr>
+                    <tr>
+                    	<td>Mood:</td>
+                        <td>
+                        	<select name="mood">
+                        		<option value="Amused">Amused</option>
+                                <option value="Angry">Angry</option>
+                                <option value="Happy">Happy</option>
+                                <option value="Sad">Sad</option>
+                            </select>
+                    </tr>
+                    <tr>
+                    	<td><input type="submit" value="Submit Changes" /></td>
+                        <td><input type="reset" value="Reset" /></td>
+                    </tr>
+                </table>
+            </form>
+            <hr />
+            <div class="footer">Created by Brad Haga for the ARAS Group on 04/06/2012</div>
+      </div>
+      
+    </div>
+</body>
+</html>
