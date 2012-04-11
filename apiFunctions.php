@@ -48,7 +48,7 @@ function getFeed($userid, $fromTime = null, $limitPosts = true) {
     $qStr = "SELECT * FROM Friends WHERE UserID = $userid_v";
     $result = fetchAllRows(mysql_query($qStr));
     $friends = array();
-    $friendsRegex = "($userid_v)";
+    $friendsRegex = "(^$userid_v$)";
     foreach($result as $row) {
         $fid = $row['FriendID'];
         $friends[] = $fid;
