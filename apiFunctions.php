@@ -58,7 +58,7 @@ function getFeed($userid, $fromTime = null, $limitPosts = true) {
     $qStr2 = "SELECT * FROM Posts WHERE (UserID REGEXP '$friendsRegex' "
         . "OR FriendUserID REGEXP '$friendsRegex')"
         . ($fromTime_v ? " AND Time > FROM_UNIXTIME($fromTime_v)" : '')
-        . " ORDER BY Time" . ($limitPosts ? " LIMIT 20" : '');
+        . " ORDER BY Time DESC" . ($limitPosts ? " LIMIT 20" : '');
     $result2 = mysql_query($qStr2);
     $retval['posts'] = fetchAllRows($result2);
     $qStr3 = "SELECT Likes.UserID, Likes.PostID, Likes.Time "
