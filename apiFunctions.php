@@ -52,7 +52,7 @@ function getFeed($userid, $fromTime = null) {
     foreach($result as $row) {
         $fid = $row['FriendID'];
         $friends[] = $fid;
-        $friendsRegex .= "|($fid)";
+        $friendsRegex .= "|(^$fid$)";
     }
 
     $qStr2 = "SELECT * FROM Posts WHERE (UserID REGEXP '$friendsRegex' "
