@@ -107,7 +107,8 @@
 
         $qStr2 = "SELECT * FROM Posts WHERE (UserID REGEXP $friendsRegex "
             . "OR FriendUserID = $friendsRegex)"
-            . ($fromTime_v ? " AND Time > FROM_UNIXTIME($fromTime_v)" : '');
+            . ($fromTime_v ? " AND Time > FROM_UNIXTIME($fromTime_v)" : '')
+            . " ORDER BY Time";
         $result2 = mysql_query($qStr2);
         $retval['posts'] = fetchAllRows($result2);
         $qStr3 = "SELECT Likes.UserID, Likes.PostID, Likes.Time "
