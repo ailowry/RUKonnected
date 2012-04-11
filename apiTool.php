@@ -15,6 +15,9 @@
             if($('input[name=postid]')) {
                 data['postid'] = $('input[name=postid]').val();
             }
+            if($('input[name=time]')) {
+                data['lastCall'] = $('input[name=time]').val();
+            }
             $.post('api.php', data, function(res) {
                 $('#response').text(res);
             });
@@ -26,6 +29,7 @@
         Action:<input type="text" name="action"><br>
         FriendID:<input type="text" name="friendid"><br>
         PostID:<input type="text" name="postid"><br>
+        Last Call:<input type="text" name="time"><br>
         Content:<textarea name="content"></textarea><br>
         <button type="button" onclick="makeRequest(); return false;">submit</button>
     </form>
