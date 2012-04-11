@@ -43,6 +43,9 @@
         else if($action == 'likePost') {
             $response = likePost($userid, $input['postid']);
         }
+        else if($action == 'getUserInfo') {
+            $response = getUserInfo($input['userids']);
+        }
         else {
             $err = 'Error: Improper api call';
         }

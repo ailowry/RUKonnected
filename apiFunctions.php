@@ -99,6 +99,24 @@ function likePost($userid, $postid) {
 }
 
 /**
+ * Get display names and picture urls for an array of users
+ * @param $userids the ids of users to look up
+ * @returns an array of information about users
+ */
+function getUserInfo($userids) {
+    $usersRegex = '';
+    foreach($userids as $id) {
+        $id_v = (int)$id;
+        $usersRegex .= "|(^$id_v$)";
+    }
+    $usersRegex = preg_replace('/^\|/', '', $usersRegex);
+    $qStr = "SELECT id, CONCAT(fname, ' ', lname) AS displayname, ProfilePicAddress "
+        . "FROM Users WHERE id REGEXP '$usersRegex'";
+    $result = mysql_query($qStr);
+    return fetchAllRows($result);
+}
+
+/**
  * Fetches all rows from a database result
  * @param $result the database result object to fetch rows from
  * @return An Assoc array of results rows
