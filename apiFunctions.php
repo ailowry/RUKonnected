@@ -40,7 +40,7 @@ function makePost($userid, $text, $friendid = null) {
  * @param $fromTime The cutoff point for items being too old to be relevent
  * @return An array of posts that user or friend of user made or recieved
  */
-function getFeed($userid, $fromTime = null) {
+function getFeed($userid, $fromTime = null, $limitPosts = true) {
     $userid_v = (int)$userid;
     if($fromTime != null) {
         $fromTime_v = (int)$fromTime;
@@ -58,7 +58,7 @@ function getFeed($userid, $fromTime = null) {
     $qStr2 = "SELECT * FROM Posts WHERE (UserID REGEXP '$friendsRegex' "
         . "OR FriendUserID REGEXP '$friendsRegex')"
         . ($fromTime_v ? " AND Time > FROM_UNIXTIME($fromTime_v)" : '')
-        . " ORDER BY Time";
+        . " ORDER BY Time" . ($limitPosts ? " LIMIT 20" : '');
     $result2 = mysql_query($qStr2);
     $retval['posts'] = fetchAllRows($result2);
     $qStr3 = "SELECT Likes.UserID, Likes.PostID, Likes.Time "
