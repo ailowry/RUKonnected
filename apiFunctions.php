@@ -55,15 +55,15 @@ function getFeed($userid, $fromTime = null) {
         $friendsRegex .= "|($fid)";
     }
 
-    $qStr2 = "SELECT * FROM Posts WHERE (UserID REGEXP $friendsRegex "
-        . "OR FriendUserID = $friendsRegex)"
+    $qStr2 = "SELECT * FROM Posts WHERE (UserID REGEXP '$friendsRegex' "
+        . "OR FriendUserID REGEXP '$friendsRegex')"
         . ($fromTime_v ? " AND Time > FROM_UNIXTIME($fromTime_v)" : '')
         . " ORDER BY Time";
     $result2 = mysql_query($qStr2);
     $retval['posts'] = fetchAllRows($result2);
     $qStr3 = "SELECT Likes.UserID, Likes.PostID, Likes.Time "
         . "FROM Likes JOIN Posts ON Likes.PostID = Posts.PostID "
-        . "WHERE (Posts.UserID = $friendsRegex OR FriendUserID = $friendsRegex)"
+        . "WHERE (Posts.UserID REGEXP '$friendsRegex' OR FriendUserID REGEXP '$friendsRegex')"
         . ($fromTime_v ? " AND Likes.Time > FROM_UNIXTIME($fromTime_v)" : '');
     $result3 = mysql_query($qStr3);
     $retval['likes'] = fetchAllRows($result3);
