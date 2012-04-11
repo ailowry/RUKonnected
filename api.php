@@ -34,7 +34,7 @@
             }
         }
         else if($action == 'getFeed') {
-            $response = getFeed($userid);
+            $response = getFeed($userid, $input['lastCall']);
         }
         else if($action == 'makeFriendRequest') {
             $response = makeFriendRequest($userid, $input['friendid']);
@@ -87,27 +87,33 @@
     /**
      * Gets all posts that user, or a friend of that user, has made or recieved
      * @param $userid The userid of the user
+     * @param $fromTime The cutoff point for items being too old to be relevent
      * @return An array of posts that user or friend of user made or recieved
      */
-    function getFeed($userid) {
+    function getFeed($userid, $fromTime = null) {
         $userid_v = (int)$userid;
+        if($fromTime != null) {
+            $fromTime_v = (int)$fromTime;
+        }
         $qStr = "SELECT * FROM Friends WHERE UserID = $userid_v";
-        $result = mysql_query($qStr);
+        $result = fetchAllRows(mysql_query($qStr));
         $friends = array();
         $friendsRegex = "($userid_v)";
         foreach($result as $row) {
             $fid = $row['FriendID'];
-            $friends.push($fid);
+            $friends[] = $fid;
             $friendsRegex .= "|($fid)";
         }
 
-        $qStr2 = "SELECT * FROM Posts WHERE UserID REGEXP $friendsRegex "
-                 . "OR FriendUserID = $friendsRegex";
+        $qStr2 = "SELECT * FROM Posts WHERE (UserID REGEXP $friendsRegex "
+            . "OR FriendUserID = $friendsRegex)"
+            . ($fromTime_v ? " AND Time > FROM_UNIXTIME($fromTime_v)" : '');
         $result2 = mysql_query($qStr2);
         $retval['posts'] = fetchAllRows($result2);
         $qStr3 = "SELECT Likes.UserID, Likes.PostID, Likes.Time "
             . "FROM Likes JOIN Posts ON Likes.PostID = Posts.PostID "
-            . "WHERE Posts.UserID = $friendsRegex OR FriendUserID = $friendsRegex";
+            . "WHERE (Posts.UserID = $friendsRegex OR FriendUserID = $friendsRegex)"
+            . ($fromTime_v ? " AND Likes.Time > FROM_UNIXTIME($fromTime_v)" : '');
         $result3 = mysql_query($qStr3);
         $retval['likes'] = fetchAllRows($result3);
         return $retval;
