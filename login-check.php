@@ -11,8 +11,9 @@
 	//Validation error flag
 	$errflag = false;
 	
-	$link=mysql_connect(HOST, USERNAME, PASSWORD) or die("Could not connect: " . mysql_error());
-	$db=mysql_select_db(DATABASE,$link) or die("Could not connect: " . mysql_error());
+	//$link=mysql_connect(HOST, USERNAME, PASSWORD) or die("Could not connect: " . mysql_error());
+	//$db=mysql_select_db(DATABASE,$link) or die("Could not connect: " . mysql_error());
+    require('./db.php');
 	
 	
 	//Function to sanitize values received from the form. Prevents SQL injection
