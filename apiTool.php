@@ -1,3 +1,6 @@
+<?php
+	require_once('auth.php');
+?>
 <html>
 <head>
     <script type="text/javascript" src="./scripts/jquery-1.7.2.min.js">
@@ -25,6 +28,10 @@
     </script>
 </head>
 <body>
+    UserID: <?php echo $_SESSION['SESS_MEMBER_ID'] ?>
+    <br>
+    Username: <?php echo $_SESSION['SESS_FIRST_NAME']." ".$_SESSION['SESS_LAST_NAME'] ?>
+    <br>
     <form name="input">
         Action:<input type="text" name="action"><br>
         FriendID:<input type="text" name="friendid"><br>

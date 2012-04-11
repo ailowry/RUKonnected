@@ -1,4 +1,5 @@
 <?php
+	require_once('auth.php');
     require('./db.php');
     require('./apiFunctions.php');
 
@@ -17,9 +18,7 @@
      * @return Result of routing
      */
     function routeAction($input) {
-        // Temporary test value
-        $userid = 1;
-
+        $userid = $_SESSION['SESS_MEMBER_ID'];
         $action = $input['action'];
         $err = null;
 
