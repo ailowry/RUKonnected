@@ -1,4 +1,6 @@
 <?php
+require('./db.php');
+
 /**
  * Gets an array of all messages user has sent or recieved
  * @param $userid The id of the user requesting messages

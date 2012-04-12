@@ -1,6 +1,5 @@
 <?php
 	require_once('auth.php');
-    require('./db.php');
     require('./apiFunctions.php');
 
     if($_GET['action']) {
