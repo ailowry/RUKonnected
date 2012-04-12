@@ -61,7 +61,7 @@
 			$_SESSION['SESS_FIRST_NAME'] = $member['fname'];
 			$_SESSION['SESS_LAST_NAME'] = $member['lname'];
 			session_write_close();
-			header("location: home.php");
+			header("location: feed.php");
 			exit();
 		}else {
 			//Login failed
