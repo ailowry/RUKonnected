@@ -9,8 +9,9 @@
 	</head>
 	
   <body>
-	<div id="header"><h3><img src="./imgs/logo.png" alt="RUConnected" border=0 /></h3></div>
-  	
+	<div id="header">
+		<img src="./imgs/RUConnected_Logo.png" alt="RUConnected Logo" />
+  </div>	
   	<div id="content">
 	  	 <div class="login-box">
 	  	  <form action="login-check.php" method="POST">

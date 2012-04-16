@@ -11,9 +11,8 @@
 	//Validation error flag
 	$errflag = false;
 	
-	//$link=mysql_connect(HOST, USERNAME, PASSWORD) or die("Could not connect: " . mysql_error());
-	//$db=mysql_select_db(DATABASE,$link) or die("Could not connect: " . mysql_error());
-    require('./db.php');
+	$link=mysql_connect(HOST, USERNAME, PASSWORD) or die("Could not connect: " . mysql_error());
+	$db=mysql_select_db(DATABASE,$link) or die("Could not connect: " . mysql_error());
 	
 	
 	//Function to sanitize values received from the form. Prevents SQL injection
@@ -61,8 +60,9 @@
 			$_SESSION['SESS_FIRST_NAME'] = $member['fname'];
 			$_SESSION['SESS_LAST_NAME'] = $member['lname'];
 			$_SESSION['SESS_PICTURE'] = $member['ProfilePicAddress'];
+			$_SESSION['SESS_EMAIL'] = $member['email'];
 			session_write_close();
-			header("location: feed.php");
+			header("location: home.php");
 			exit();
 		}else {
 			//Login failed
