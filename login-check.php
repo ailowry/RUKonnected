@@ -59,6 +59,7 @@
 			$_SESSION['SESS_MEMBER_ID'] = $member['id'];
 			$_SESSION['SESS_FIRST_NAME'] = $member['fname'];
 			$_SESSION['SESS_LAST_NAME'] = $member['lname'];
+			$_SESSION['SESS_PICTURE'] = $member['ProfilePicAddress'];
 			session_write_close();
 			header("location: home.php");
 			exit();
