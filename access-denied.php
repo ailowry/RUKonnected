@@ -11,8 +11,7 @@
 	
   <body>
 	<div id="header">
-	 <img src="./imgs/RUConnected_Logo.png" alt="RUConnected Logo" />
-	 <span style="margin-top:10px;font-size:22px;color:#fff;float:right;margin-right:15px;"> Access Denied </span></h3>
+	 <h3><img src="./imgs/logo.png" alt="RUConnected" border=0 /><span style="margin-top:10px;font-size:22px;color:#fff;float:right;margin-right:15px;"> Access Denied </span></h3>
 	 
 	</div>
   	

@@ -60,7 +60,6 @@
 			$_SESSION['SESS_FIRST_NAME'] = $member['fname'];
 			$_SESSION['SESS_LAST_NAME'] = $member['lname'];
 			$_SESSION['SESS_PICTURE'] = $member['ProfilePicAddress'];
-			$_SESSION['SESS_EMAIL'] = $member['email'];
 			session_write_close();
 			header("location: home.php");
 			exit();

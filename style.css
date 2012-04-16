@@ -9,38 +9,15 @@ body{
 
 #header {
 	width:960px;
-  margin-left:auto;
-  margin-right:auto;
+  	margin-left:auto;
+  	margin-right:auto;
 	height:45px;
 	background-color:#c2011b;
 	color:#fff;
 	font-size:35px;
-  border-style:groove;
-}
-
-#header span{
-	float:right;
-}
-
-#header input {
-	margin-left:5px;
-	border-style:none; 
-	color:white; 
-	background-color:#c2011b; 
-	font-size:12px;
-	position:relative;
-	top:-5px;
-	left:-5px;
+  	border-style:groove;
 }
 #header h3{margin-top:0px;}
-
-#header a{
-	float:right; 
-	margin-top:0; 
-	margin-right:5px; 
-	font-size:12px
-}
-
 #content{
   background-color:#FFF;
   width:960px;
@@ -53,7 +30,7 @@ body{
 	padding-top:30px;
 	width:320px;
 	margin-left:auto;
-  margin-right:auto;
+  	margin-right:auto;
 }
 
 .login-box input{
@@ -82,44 +59,8 @@ body{
 }
 .leftbar p{
   color: #3B5998;
-	text-align:left;
   text-decoration: none;
   font-size:20px;
   margin-left:10px;
   margin-top:10px;
-}
-
-#content .message {
-	margin-top:20px; 
-	width:100%; 
-	border-top:solid; 
-	border-color:#DDD;
-}
-
-#content .message a {
-	position:absolute; 
-	margin-top:20px; 
-	margin-left:5px; 
-	font-weight:bold; 
-	color:rgb(59,89,152); 
-	text-decoration:none;
-}
-
-#content .message span{
-	float:left; 
-	color:#bbb190; 
-	position:relative; 
-	top:-50px; 
-	font-weight:normal; 
-	margin-left:90px;
-}
-
-#content .message .messageDate {
-	float:right; 
-	margin-left:350px;
-}
-
-#content .message img{
-	width:70px; 
-	position:relative;
 }
