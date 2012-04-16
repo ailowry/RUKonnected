@@ -1,8 +1,6 @@
 <?php
-
-$dbhost = "99.99.99.7";
-$dbusername = "username";
-$dbpassword = "password";
-$dbname = "nameofdb";
-
+	DEFINE('HOST','localhost');
+	DEFINE('USERNAME','username');
+	DEFINE('PASSWORD','password');
+	DEFINE('DATABASE','nameofdb');
 ?>

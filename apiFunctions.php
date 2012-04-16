@@ -1,5 +1,8 @@
 <?php
-require('./db.php');
+require_once('config.php');
+
+$link=mysql_connect(HOST, USERNAME, PASSWORD) or die("Could not connect: " . mysql_error());
+$db=mysql_select_db(DATABASE,$link) or die("Could not connect: " . mysql_error());
 
 /**
  * Gets an array of all messages user has sent or recieved
