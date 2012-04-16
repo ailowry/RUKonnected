@@ -14,7 +14,7 @@ body{
 	height:45px;
 	background-color:#c2011b;
 	color:#fff;
-	font-size:12px;
+	font-size:35px;
   border-style:groove;
 }
 
@@ -32,6 +32,7 @@ body{
 	top:-5px;
 	left:-5px;
 }
+#header h3{margin-top:0px;}
 
 #header a{
 	float:right; 
@@ -61,7 +62,7 @@ body{
 }
 
 .leftbar{
-  width:200px;
+  width:175px;
   height:100%;
   background-color:rgb(229,229,219);
   float:left;	
@@ -69,7 +70,7 @@ body{
 
 .leftbar img{
 	margin-top:10px;
-	margin-left:20px;
+	margin-left:12px;
 }
 
 .leftbar span{
@@ -80,10 +81,10 @@ body{
   margin-top:10px;
 }
 .leftbar p{
-  color: rgb(0,31,68);
+  color: #3B5998;
 	text-align:left;
   text-decoration: none;
-  font-size:12px;
+  font-size:20px;
   margin-left:10px;
   margin-top:10px;
 }
