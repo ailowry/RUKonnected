@@ -1,8 +1,10 @@
 <?php
 require_once('config.php');
 
-$link=mysql_connect(HOST, USERNAME, PASSWORD) or die("Could not connect: " . mysql_error());
-$db=mysql_select_db(DATABASE,$link) or die("Could not connect: " . mysql_error());
+$link=mysql_connect(HOST, USERNAME, PASSWORD)
+    or die("Could not connect: " . mysql_error());
+$db=mysql_select_db(DATABASE,$link)
+    or die("Could not connect: " . mysql_error());
 
 /**
  * Gets an array of all messages user has sent or recieved
@@ -36,6 +38,22 @@ function makePost($userid, $text, $friendid = null) {
         $qStr = "INSERT INTO Posts(UserID, PostContent, Time) "
                 . "VALUES($userid_v, '$text_v', NOW())";
     }
+    return mysql_query($qStr) ? true : mysql_error;
+}
+
+/**
+ * Makes a comment to a post
+ * @param $userid The id of the user making the comment
+ * @param $content the content of the comment
+ * @param $postid The id of the post to comment on
+ * @return True if comment was success, error if comment failed
+ */
+function makeComment($userid, $content, $postid) {
+    $userid_v = (int)$userid;
+    $content_v = mysql_real_escape_string($content);
+    $postid_v = (int)$postid;
+    $qStr = "INSERT INTO Comments(UserID, Comment, PostID, Time) "
+        . "VALUES($userid_v, '$content_v', $postid_v, NOW())";
     return mysql_query($qStr) ? true : mysql_error;
 }
 

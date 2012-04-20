@@ -26,11 +26,16 @@
         }
         else if($action == 'makePost') {
             if($input['friendid']) {
-                $response = makePost($userid, $input['content'], $input['friendid']);
+                $response = makePost($userid, $input['content'],
+                    $input['friendid']);
             }
             else {
                 $response = makePost($userid, $input['content']);
             }
+        }
+        else if($action == 'makeComment') {
+            $response = makeComment($userid, $input['content'],
+                $input['postid']);
         }
         else if($action == 'getFeed') {
             $response = getFeed($userid, $input['lastCall']);
@@ -50,4 +55,4 @@
 
         return $err ? $err : json_encode($response);
     }
-
+?>
