@@ -1,18 +1,32 @@
 <div class="mainpost" postid="{{PostID}}">
-    <table class="mainpost">
+    <table>
         <tr>
-            <td width="35px"><img src="{{pic}}" alt="avatar" name="userImage" width="32" height="32" style="background-color: #FF0000" /></td>
-            <td><h3>{{displayname}}</h3></td>
-            <td><em>{{Time}}</em></td>
+            <td class="postprofileimg">
+                <img src="{{pic}}" alt="avatar" name="userImage" />
+            </td>
+            <td class="postdisplayname">
+                <h3>{{displayname}}</h3>
+            </td>
+            <td class="posttime">
+                <em>{{Time}}</em>
+            </td>
         </tr>
         <tr>
-            <td colspan="4">{{PostContent}}</td>
+            <td colspan="4" class="postcontent">
+                {{PostContent}}
+            </td>
         </tr>
         <tr>
-            <td colspan="4"><a href="#">Like</a> * <a href="#">Comment</a> * <a href="#">Share</a></td>
+            <td colspan="4">
+                <a href="#">Like</a> * <a href="#">Comment</a> * <a href="#">
+                    Share
+                </a>
+            </td>
         </tr>
         <tr>
-            <td colspan="4"><a href="#">View all comments.</a></td>
+            <td colspan="4">
+                <a href="#">View all comments.</a>
+            </td>
         </tr>
     </table>
 </div>

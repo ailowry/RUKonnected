@@ -7,6 +7,9 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<link rel="stylesheet" type="text/css" href="style.css"/>
+        <script type="text/javascript" src="./scripts/jquery-1.7.2.min.js"></script>
+        <script type="text/javascript" src="./scripts/mustache.js"></script>
+        <script type="text/javascript" src="./scripts/feed.js"></script>
 
 		<title>RUConnected | Home</title>
 	
@@ -24,6 +27,10 @@
 		  	 <br/>
 		  	 <div style="margin-left:12px;width:150px;border-bottom:#f0f0f0 1px solid;"></div> 	 
 	  	 </div>
+         <div class="rightbar">
+             <div class="postarea">
+             </div>
+         </div>
 	  	 
 	  	 
   	</div>
