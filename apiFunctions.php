@@ -6,15 +6,27 @@ $link=mysql_connect(HOST, USERNAME, PASSWORD)
 $db=mysql_select_db(DATABASE,$link)
     or die("Could not connect: " . mysql_error());
 
+// get newest message from each friend
+function getNewestMessages($userid) {
+    $userid_v   = (int)$userid;	  //current user
+    $qStr =  "SELECT t2.MessageID, t2.SenderID, t2.ReceiverID, t2.Content,"
+			 . " MAX(DATE_FORMAT(Time, '%M %e %l:%i%p')) as Time FROM ("
+			 . " SELECT t1.MessageID, t1.SenderID, t1.ReceiverID, t1.Content, t1.Time FROM Messages t1"
+			 . " WHERE receiverid = $userid_v ORDER BY time desc) t2 GROUP BY senderid ORDER BY time ";
+    $result = mysql_query($qStr);
+	return fetchAllRows($result);
+}	
+		
 /**
  * Gets an array of all messages user has sent or recieved
  * @param $userid The id of the user requesting messages
  * @return An array of messages the user has sent or recieved
  */
-function getMessages($userid) {
-    $userid_v = (int)$userid;
-    $qStr = "SELECT * FROM Messages WHERE (UserID = $userid_v "
-            . "OR FriendID = $userid_v)";
+function getMessagesFromFriend($userid, $friendid) {
+    $userid_v = (int)$userid; //logged in
+	$friendid_v = (int)$friendid; // friend that sent messages
+    $qStr = "SELECT * FROM Messages WHERE SenderID = $friendid_v "
+            . "AND ReceiverID = $userid_v order by time desc";
     $result = mysql_query($qStr);
     return fetchAllRows($result);
 }
@@ -39,6 +51,24 @@ function makePost($userid, $text, $friendid = null) {
                 . "VALUES($userid_v, '$text_v', NOW())";
     }
     return mysql_query($qStr) ? true : mysql_error;
+}
+
+/**
+ * Makes a message to friends message board
+ * @param $userid The id of the user making the message
+ * @param $content the content of the message
+ * @param $friendid The id of the friend to send message to
+ * @return True if post was success, error if post failed
+ */
+function makeMessage($userid, $text, $friendid) {
+	$userid_v = (int)$userid;
+  $text_v = mysql_real_escape_string($text);
+	if($friendid) {
+			$friendid_v = (int)$friendid;
+			$qStr = "INSERT INTO Messages(SenderID, ReceiverID, Content,  "
+							. "Time) VALUES($userid_v, $friendid_v, '$text_v',  NOW())";
+	}
+	return mysql_query($qStr) ? true : mysql_error;
 }
 
 /**

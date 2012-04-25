@@ -89,14 +89,14 @@ CREATE TABLE Friends
 CREATE TABLE Messages
 (
 	MessageID		MEDIUMINT,
-	UserID			MEDIUMINT,
-	FriendID		MEDIUMINT,
+	SenderID		MEDIUMINT,
+	ReceiverID		MEDIUMINT,
 	Content			VARCHAR(3000),
 	Time				DATETIME,
 	PRIMARY KEY (MessageID),
-	FOREIGN KEY (UserID)
+	FOREIGN KEY (SenderID)
 		REFERENCES  Users (UserID),
-	FOREIGN KEY (FriendID)
+	FOREIGN KEY (ReceiverID)
 		REFERENCES  Users (UserID)
 );
 commit;

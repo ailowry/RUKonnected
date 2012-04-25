@@ -79,14 +79,16 @@ body{
     border-radius: 4px;
     margin: 6px 0 0 4px;
 }
+.postdisplayname a{
+    color:rgb(0,31,68);
+}
 .posttime{
     text-align: right;
 }
 .postprofileimg{
-    width: 35px;
+    width: 50px;
 }
 .postprofileimg img{
-    width: 35px;
-    height: 35px;
+    width: 50px;
     background-color: #FF0000;
 }
