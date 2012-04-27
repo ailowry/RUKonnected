@@ -10,12 +10,9 @@
         <script type="text/javascript" src="./scripts/jquery-1.7.2.min.js"></script>
         <script type="text/javascript" src="./scripts/mustache.js"></script>
        <script type="text/javascript" src="./scripts/messages.js"></script>
-       <script type="text/javascript">var currentuser=<?php echo $_SESSION['SESS_MEMBER_ID'] ?>;</script>
-         
+       <script type="text/javascript">var currentuser=<?php echo $_SESSION['SESS_MEMBER_ID'] ?>;</script>    
 		<title>RUConnected | Messages</title>
-	
 	</head>
-	
   <body>
 	<div id="header">
    <h3><img src="./imgs/logo.png" alt="RUConnected" border=0 />
@@ -32,6 +29,7 @@
            <h1 align="center">Messages</h1>
            <div class="messagearea"></div>
          </div>
+				 <div class="clear"></div>
   	</div>
   </body>
 </html>

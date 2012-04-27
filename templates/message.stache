@@ -1,20 +1,19 @@
 <div class="mainpost" msgid="{{MessageID}}">
   <table>
     <tr>
-      <td class="postprofileimg">
+      <td class="commentprofileimg">
         <img src="{{pic}}" alt="avatar" name="userImage" />
       </td>
-      <td class="postdisplayname msglink" userid="{{LinkID}}">
+      <td class="commentdisplayname msglink" userid="{{LinkID}}">
         <a><h3>{{displayname}}</h3></a>
-        {{Content}}<br />
       </td>
-      <td class="posttime">
+      <td class="commenttime">
         <em>{{Time}}</em>
       </td>
     </tr>
     <tr>
-      <td colspan="4" class="postcontent">
-        {{PostContent}}
+      <td colspan="4" class="commentcontent">
+        {{Content}}
       </td>
     </tr>
   </table>
