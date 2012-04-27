@@ -214,6 +214,9 @@ function makeComment(form) {
     $.post('api.php', postData, function(res) {
         if(res) {
             customAlert("Comment posted");
+			//fix & take out!
+			setTimeout(function() {window.location.reload();},1000);
+			
         }
     });
 }
