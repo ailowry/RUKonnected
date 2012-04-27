@@ -198,6 +198,9 @@ function makePost(form) {
     $.post('api.php', {action: 'makePost', content: $(input).val()},
             function(res) {
         $(input).val('');
+        if(res) {
+            customAlert("Post successful");
+        }
     });
 }
 
