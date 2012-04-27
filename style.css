@@ -63,6 +63,12 @@ body{
   margin-left:10px;
   margin-top:10px;
 }
+.UsersName{
+ color: #3B5998;
+  text-decoration: none;
+  font-size:20px;text-align:center;
+}
+
 .rightbar{
     min-width: 608px;
     height: 100%;
@@ -105,6 +111,36 @@ body{
     border-radius: 4px;
     padding: 5px;
 }
+
+.postNstuff{
+	position:relative;
+	margin-left:190px;/* do the math with leftbar */
+	width:650px;
+	height: auto;
+	margin-bottom:10px;
+	padding-bottom:10px;
+	border: 1px solid gray;
+    border-radius: 4px 4px 4px 4px;
+    
+}
+.postNstuff .name{
+	font-size:17px;
+	font-weight:bold;
+}
+.postNstuff .post{margin-left:25px;}
+.postNstuff .picture{
+	float:left;
+	margin:2px 5px 2px 2px;
+	background-color:transparent;
+	}
+.postNstuff .tools{
+	color: blue;
+	margin:-18px 5px 5px 0px;/* math trick with home.php */
+	float:right;
+	font-weight:bold;
+}
+
+
 .commentarea {
 }
 .comment {
