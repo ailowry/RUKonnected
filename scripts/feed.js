@@ -11,6 +11,7 @@ $(document).ready(function() {
     var localData = {};
     localData.users = {};
     localData.postids = [];
+    generatePossibleFriends(); 
 
     loadTemplates(localData, function(res) {
         var timers = function() {

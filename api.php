@@ -67,6 +67,13 @@
                 $response = getComments($userid, null, $input['lastCall']);
             }
         }
+        else if($action == 'getPossibleFriends') {
+            $response = getSimilarNames($input['content']);
+        }
+        else if($action == 'makeFriend') {
+            $friendid = getUserIdFromName($input['friendname']);
+            $response = makeFriend($userid, $friendid);
+        }
         else {
             $err = 'Error: Improper api call';
         }

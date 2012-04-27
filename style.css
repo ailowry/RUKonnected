@@ -154,6 +154,18 @@ body{
     -moz-border-radius: 4px;
     border-radius: 4px;
 }
+#friendfinder {
+    display: inline-block;
+    vertical-align: bottom;
+    margin: 0;
+    position: relative;
+    bottom: 10px;
+}
+#friendfinder input {
+    vertical-align: bottom;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
 .clear {
     clear: both;
 }

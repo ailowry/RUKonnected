@@ -213,6 +213,39 @@ function getUserInfo($userids) {
     return fetchAllRows($result);
 }
 
+function getSimilarNames($name) {
+    $name_v = mysql_real_escape_string($name);
+    $qStr = "SELECT CONCAT(fname, ' ', lname) AS displayname FROM Users WHERE "
+        . "fname REGEXP '.*$name_v.*' OR lname REGEXP '.*$name_v.*'";
+    $result = mysql_query($qStr);
+
+    $rows = array();
+    while($row = mysql_fetch_assoc($result)) {
+        $rows[] = $row['displayname'];
+    }
+    return $rows;
+}
+
+function makeFriend($userid, $friendid) {
+    $userid_v = (int)$userid;
+	$friendid_v = (int)$friendid;
+    $qStr = "INSERT INTO Friends(UserID, FriendID, Time) "
+        . "VALUES($userid_v, $friendid_v, NOW())";
+    mysql_query($qStr);
+    $qStr2 = "INSERT INTO Friends(UserID, FriendID, Time) "
+        . "VALUES($friendid_v, $userid_v, NOW())";
+    return mysql_query($qStr2);
+}
+
+function getUserIdFromName($username) {
+    $username_v = mysql_real_escape_string($username);
+    $qStr = "SELECT id FROM Users WHERE CONCAT(fname, ' ', lname) = "
+        . "'$username_v'";
+    $result = mysql_query($qStr);
+    $row = mysql_fetch_assoc($result);
+    return $row['id'];
+}
+
 /**
  * Fetches all rows from a database result
  * @param $result the database result object to fetch rows from
