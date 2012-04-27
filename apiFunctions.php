@@ -100,7 +100,10 @@ function getFeed($userid, $fromTime = null, $limitPosts = true) {
     }
     $qStr = "SELECT * FROM Friends WHERE UserID = $userid_v";
     $result = fetchAllRows(mysql_query($qStr));
-    $friendsRegex = "(^$userid_v$)" . getFriendsRegex($userid);
+    $friendsRegex = getFriendsRegex($userid);
+    $friendsRegex = $friendsRegex
+        ? "(^$userid_v$)|" . $friendsRegex
+        : "(^$userid_v$)";
 
     $qStr2 = "SELECT * FROM Posts WHERE (UserID REGEXP '$friendsRegex' "
         . "OR FriendUserID REGEXP '$friendsRegex')"
@@ -151,7 +154,7 @@ function getFriendsRegex($userid) {
     $qStr = "SELECT * FROM Friends WHERE UserID = $userid_v";
     $result = fetchAllRows(mysql_query($qStr));
     $friendsRegex = "";
-    foreach($result as $key => $row) {
+    foreach($result as $row) {
         $fid = (int)$row['FriendID'];
         $friendsRegex .= ($friendsRegex === '') ? "(^$fid$)" : "|(^$fid$)";
     }
