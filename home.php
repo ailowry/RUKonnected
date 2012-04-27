@@ -9,6 +9,7 @@
 		<link rel="stylesheet" type="text/css" href="style.css"/>
         <script type="text/javascript" src="./scripts/jquery-1.7.2.min.js"></script>
         <script type="text/javascript" src="./scripts/mustache.js"></script>
+        <script type="text/javascript" src="./scripts/common.js"></script>
         <script type="text/javascript" src="./scripts/feed.js"></script>
 
 		<title>RUConnected | Home</title>
@@ -31,6 +32,8 @@
              <div class="postarea">
              </div>
          </div>
+         <div class="clear"></div>
+         <div class="alert" style="display:none"></div>
 	  	 
 	  	 
   	</div>

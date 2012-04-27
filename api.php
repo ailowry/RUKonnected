@@ -49,6 +49,15 @@
         else if($action == 'getUserInfo') {
             $response = getUserInfo($input['userids']);
         }
+        else if($action == 'getComments') {
+            if($input['postids']) {
+                $response = getComments($userid, $input['postids'],
+                    $input['lastCall']);
+            }
+            else {
+                $response = getComments($userid, null, $input['lastCall']);
+            }
+        }
         else {
             $err = 'Error: Improper api call';
         }

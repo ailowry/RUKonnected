@@ -1,5 +1,6 @@
-var REFRESH_RATE = 10000;
+var REFRESH_RATE = 5000;
 var POST_CONTAINER_CLASS = 'postarea';
+var COMMENT_CONTAINER_CLASS = 'commentarea';
 var POST_TEMPLATE_URL = 'templates/post.stache';
 var COMMENT_TEMPLATE_URL = 'templates/comment.stache';
 
@@ -9,12 +10,13 @@ var COMMENT_TEMPLATE_URL = 'templates/comment.stache';
 $(document).ready(function() {
     var localData = {};
     localData.users = {};
+    localData.postids = [];
 
     loadTemplates(localData, function(res) {
-        getFeed(localData);
         var timers = function() {
-            getFeed(localData);
+            getFeed(localData, getComments);
         }
+        timers();
         localData.timer = setInterval(timers, REFRESH_RATE);
     });
 });
@@ -38,26 +40,81 @@ function loadTemplates(localData, next) {
  * Renders wall from api feed
  * @param localData Local app data
  */
-function getFeed(localData) {
-    var data = {action: 'getFeed'};
-    if(localData.lastUpdate) {
-        data.lastCall = localData.lastUpdate
+function getFeed(localData, next) {
+    var postData = {action: 'getFeed'};
+    if(localData.lastFeedUpdate) {
+        postData.lastCall = localData.lastFeedUpdate;
     }
-    localData.lastUpdate = getUnixTime();
+    localData.lastFeedUpdate = getUnixTime();
 
-    $.post('api.php', data, function(res) {
+    $.post('api.php', postData, function(res) {
         var data = $.parseJSON(res);
-        var unknownUsers = checkPostsForUnknownUsers(data.posts, localData.users);
+        $.each(data.posts, function(key, post) {
+            localData.postids.push(post.PostID);
+        });
+        var unknownUsers = checkPostsForUnknownUsers(data.posts,
+            localData.users);
         if(unknownUsers) {
             getUserInfo(unknownUsers, function(newNames) {
                 localData.users = $.extend(localData.users, newNames);
-                renderPosts(data.posts, localData.postTemplate, localData.users);
+                renderPosts(data.posts, localData.postTemplate,
+                    localData.users);
+                next(localData);
             });
         }
         else {
             renderPosts(data.posts, localData.postTemplate, localData.users);
+            next(localData);
         }
     });
+}
+
+/**
+ * Gets all comments by friends and on friend's posts
+ * @param localData Local app data
+ */
+function getComments(localData) {
+    if(localData.postids) {
+        console.log(localData.postids);
+        var postData = {action: 'getComments', postids: localData.postids};
+        if(localData.lastCommentUpdate) {
+            postData.lastCall = localData.lastCommentUpdate;
+        }
+        localData.lastCommentUpdate = getUnixTime();
+
+        $.post('api.php', postData, function(res) {
+            var comments = $.parseJSON(res);
+            renderComments(comments, localData.commentTemplate,
+                localData.users);
+        });
+    }
+}
+
+/**
+ * Renders an array of comments
+ * @param comments An array of comments to render
+ * @param template The template to use to render comments
+ * @param users An array of user information
+ */
+function renderComments(comments, template, users) {
+    $.each(comments, function(key, comment) {
+        if($('div[postid="' + comment.PostID + '"]').length
+                && !$('div[commentid="' + comment.CommentID + '"]').length) {
+            comment = $.extend(comment, users[comment.UserID]);
+            renderComment(comment, template);
+        }
+    });
+}
+
+/**
+ * Render a comment
+ * @param comment The comment to render
+ * @param template The template to use to render comments
+ */
+function renderComment(comment, template) {
+    var e = Mustache.render(template, comment);
+    $('div[class="' + COMMENT_CONTAINER_CLASS + '"]'
+        + '[postid="' + comment.PostID + '"]').append(e);
 }
 
 /**
@@ -117,9 +174,9 @@ function getUnixTime() {
  * @returns An associative array of userids and corresponding display names
  */
 function getUserInfo(userArray, next) {
-    var data = {action: 'getUserInfo'};
-    data.userids = userArray;
-    $.post('api.php', data, function(res) {
+    var postData = {action: 'getUserInfo'};
+    postData.userids = userArray;
+    $.post('api.php', postData, function(res) {
         res = $.parseJSON(res);
         var newUsers = {};
         $.each(res, function(key, row) {
@@ -137,7 +194,25 @@ function getUserInfo(userArray, next) {
 function makePost(form) {
     form = !form ? $('.postform') : form;
     var input = $(':input[name="content"]', form);
-    $.post('api.php', {action: 'makePost', content: $(input).val()}, function(res) {
+    $.post('api.php', {action: 'makePost', content: $(input).val()},
+            function(res) {
         $(input).val('');
+    });
+}
+
+/**
+ * Posts a new comment
+ * @param form The from that the comment is coming from
+ */
+function makeComment(form) {
+    var postData = {
+        action: 'makeComment',
+        postid: $(form).attr('postid'),
+        content: $(form).children('textarea').val()
+    };
+    $.post('api.php', postData, function(res) {
+        if(res) {
+            customAlert("Comment posted");
+        }
     });
 }
