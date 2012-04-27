@@ -1,0 +1,21 @@
+<div class="mainpost" msgid="{{MessageID}}">
+  <table>
+    <tr>
+      <td class="postprofileimg">
+        <img src="{{pic}}" alt="avatar" name="userImage" />
+      </td>
+      <td class="postdisplayname msglink" userid="{{LinkID}}">
+        <a><h3>{{displayname}}</h3></a>
+        {{Content}}<br />
+      </td>
+      <td class="posttime">
+        <em>{{Time}}</em>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="postcontent">
+        {{PostContent}}
+      </td>
+    </tr>
+  </table>
+</div>
