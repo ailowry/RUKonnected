@@ -69,9 +69,6 @@ body{
     float: left;
     display: inline-block;
 }
-.postare {
-    display: inline-block;
-}
 .mainpost{
     border: 1px solid gray;
     -moz-border-radius: 4px;
@@ -96,8 +93,17 @@ body{
     float: left;
 }
 .postprofileimg img{
-    width: 50px;
+    width: 35px;
+    height: 35px;
     background-color: #FF0000;
+}
+.postcontent {
+    width: 90%;
+    margin: 0 0 12px 0;
+    background-color: #AAFFAA;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    padding: 5px;
 }
 .commentarea {
 }
@@ -120,6 +126,9 @@ body{
 }
 .commentdisplayname {
     display: inline-block;
+}
+.commentdisplayname h3 {
+    margin: 8px 0;
 }
 .commenttime{
     float: right;
