@@ -100,13 +100,10 @@ function getFeed($userid, $fromTime = null, $limitPosts = true) {
     }
     $qStr = "SELECT * FROM Friends WHERE UserID = $userid_v";
     $result = fetchAllRows(mysql_query($qStr));
-    $friends = array();
-    $friendsRegex = "(^$userid_v$)";
-    foreach($result as $row) {
-        $fid = $row['FriendID'];
-        $friends[] = $fid;
-        $friendsRegex .= "|(^$fid$)";
-    }
+    $friendsRegex = getFriendsRegex($userid);
+    $friendsRegex = $friendsRegex
+        ? "(^$userid_v$)|" . $friendsRegex
+        : "(^$userid_v$)";
 
     $qStr2 = "SELECT * FROM Posts WHERE (UserID REGEXP '$friendsRegex' "
         . "OR FriendUserID REGEXP '$friendsRegex')"
@@ -121,6 +118,56 @@ function getFeed($userid, $fromTime = null, $limitPosts = true) {
     $result3 = mysql_query($qStr3);
     $retval['likes'] = fetchAllRows($result3);
     return $retval;
+}
+
+/**
+ * Gets all relevant comments for a user
+ * @param $postids An array of post ids to query comments for
+ * @return An array of comments
+ */
+function getComments($userid, $postids = null, $fromTime = null) {
+    $userid_v = $userid;
+    $friendsRegex = getFriendsRegex($userid);
+    $friendsReq = $friendsRegex ? "OR UserID REGEXP '$friendsRegex'" : "";
+
+    $timeReq = ($fromTime ? "AND Time > FROM_UNIXTIME($fromTime))" : "");
+
+    $qStr = "(SELECT * FROM Comments WHERE (UserID = $userid_v $friendsReq) " 
+        . "$timeReq)";
+    if($postids) {
+        $postidregex = getPostIdsRegex($postids);
+        $qStr .= " UNION (SELECT * FROM Comments WHERE PostID REGEXP "
+            . "'$postidregex' $timeReq)";
+    }
+    //return $qStr;
+    $result = mysql_query($qStr);
+    return fetchAllRows($result);
+}
+
+/**
+ * Creates a regular expression that matches any of users friends ids
+ * @param $userid ID of user sending request
+ * @return A regular expression that matches any of users friends ids
+ */
+function getFriendsRegex($userid) {
+    $userid_v = (int)$userid;
+    $qStr = "SELECT * FROM Friends WHERE UserID = $userid_v";
+    $result = fetchAllRows(mysql_query($qStr));
+    $friendsRegex = "";
+    foreach($result as $row) {
+        $fid = (int)$row['FriendID'];
+        $friendsRegex .= ($friendsRegex === '') ? "(^$fid$)" : "|(^$fid$)";
+    }
+    return $friendsRegex;
+}
+
+function getPostIdsRegex($postids) {
+    $postidregex = '';
+    foreach($postids as $id) {
+        $id = (int)$id;
+        $postidregex .= ($postidregex === '') ? "(^$id$)" : "|(^$id$)";
+    }
+    return $postidregex;
 }
 
 /**
@@ -167,6 +214,39 @@ function getUserInfo($userids) {
         . "FROM Users WHERE id REGEXP '$usersRegex'";
     $result = mysql_query($qStr);
     return fetchAllRows($result);
+}
+
+function getSimilarNames($name) {
+    $name_v = mysql_real_escape_string($name);
+    $qStr = "SELECT CONCAT(fname, ' ', lname) AS displayname FROM Users WHERE "
+        . "fname REGEXP '.*$name_v.*' OR lname REGEXP '.*$name_v.*'";
+    $result = mysql_query($qStr);
+
+    $rows = array();
+    while($row = mysql_fetch_assoc($result)) {
+        $rows[] = $row['displayname'];
+    }
+    return $rows;
+}
+
+function makeFriend($userid, $friendid) {
+    $userid_v = (int)$userid;
+	$friendid_v = (int)$friendid;
+    $qStr = "INSERT INTO Friends(UserID, FriendID, Time) "
+        . "VALUES($userid_v, $friendid_v, NOW())";
+    mysql_query($qStr);
+    $qStr2 = "INSERT INTO Friends(UserID, FriendID, Time) "
+        . "VALUES($friendid_v, $userid_v, NOW())";
+    return mysql_query($qStr2);
+}
+
+function getUserIdFromName($username) {
+    $username_v = mysql_real_escape_string($username);
+    $qStr = "SELECT id FROM Users WHERE CONCAT(fname, ' ', lname) = "
+        . "'$username_v'";
+    $result = mysql_query($qStr);
+    $row = mysql_fetch_assoc($result);
+    return $row['id'];
 }
 
 /**

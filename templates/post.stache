@@ -1,32 +1,21 @@
 <div class="mainpost" postid="{{PostID}}">
-    <table>
-        <tr>
-            <td class="postprofileimg">
-                <img src="{{pic}}" alt="avatar" name="userImage" />
-            </td>
-            <td class="postdisplayname">
-                <h3>{{displayname}}</h3>
-            </td>
-            <td class="posttime">
-                <em>{{Time}}</em>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="4" class="postcontent">
-                {{PostContent}}
-            </td>
-        </tr>
-        <tr>
-            <td colspan="4">
-                <a href="#">Like</a> * <a href="#">Comment</a> * <a href="#">
-                    Share
-                </a>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="4">
-                <a href="#">View all comments.</a>
-            </td>
-        </tr>
-    </table>
+    <div class="postprofileimg">
+        <img src="{{pic}}" alt="avatar" name="userImage" />
+    </div>
+    <div class="postdisplayname">
+        <h3>{{displayname}}</h3>
+    </div>
+    <div class="posttime">
+        {{Time}}
+    </div>
+    <div class="postcontent">
+        {{PostContent}}
+    </div>
+    <div class="commentarea" postid="{{PostID}}"></div>
+    <form class="commentform" postid="{{PostID}}">
+        <textarea onfocus="if(this.value=='Respond to this post') {
+            this.value = ''}">Respond to this post</textarea>
+        <input type="button" value="Comment"
+            onclick="makeComment($(this).parent())">
+    </form>
 </div>

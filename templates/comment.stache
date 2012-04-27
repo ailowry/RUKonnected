@@ -1,13 +1,6 @@
-<div class="response">
-    <table class="response">
-        <tr>
-            <td width="25px"><img src="" alt="avatar" name="userImage" width="24" height="24" style="background-color: #FF0000" /></td>
-            <td><h3>$userName</h3></td>
-            <td><h3>$postTitle</h3></td>
-            <td><em>$timestamp</em></td>
-        </tr>
-        <tr>
-            <td colspan="4">Insert message text here.  Source material allows for limited HTML formatted content</td>
-        </tr>
-    </table>
+<div class="comment" postid="{{PostID}}" commentid="{{CommentID}}">
+    <div class="commentprofileimg"><img src="{{pic}}" alt="avatar" name="userImage" width="24" height="24" style="background-color: #FF0000" /></div>
+    <div class="commentdisplayname"><h3>{{displayname}}</h3></div>
+    <div class="commenttime">{{Time}}</div>
+    <div class="commentcontent">{{Comment}}</div>
 </div>            
