@@ -22,7 +22,12 @@
         $err = null;
 
         if($action == 'getMessages') {
-            $response = getMessages($userid);
+			if(isset($input['friendid']) && $input['friendid'] != '') {
+				$response = getMessagesFromFriend($userid, $input['friendid']);
+			}
+			else {
+				$response = getNewestMessages($userid);
+			}
         }
         else if($action == 'makePost') {
             if($input['friendid']) {
@@ -33,6 +38,10 @@
                 $response = makePost($userid, $input['content']);
             }
         }
+				else if($action == 'makeMessage') {
+					$response = makeMessage($userid, $input['content'], 
+										$input['friendid']);
+				}
         else if($action == 'makeComment') {
             $response = makeComment($userid, $input['content'],
                 $input['postid']);

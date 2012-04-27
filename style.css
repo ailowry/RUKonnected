@@ -83,6 +83,9 @@ body{
 .postdisplayname {
     display: inline-block;
 }
+.postdisplayname a{
+    color:rgb(0,31,68);
+}
 .posttime{
     float: right;
     text-align: right;
@@ -93,8 +96,7 @@ body{
     float: left;
 }
 .postprofileimg img{
-    width: 35px;
-    height: 35px;
+    width: 50px;
     background-color: #FF0000;
 }
 .commentarea {
