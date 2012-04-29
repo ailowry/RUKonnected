@@ -15,10 +15,15 @@ $(document).ready(function() {
 
     loadTemplates(localData, function(res) {
         var timers = function() {
-            getFeed(localData, getComments);
+            getFeed(localData, function(localData) {
+                getComments(localData, function(localData) {});
+            });
         }
         timers();
         localData.timer = setInterval(timers, REFRESH_RATE);
+        localData.dateTimer = setInterval(function() {
+            jQuery("abbr.timeago").timeago();
+        }, 60000);
     });
 });
 
@@ -74,7 +79,7 @@ function getFeed(localData, next) {
  * Gets all comments by friends and on friend's posts
  * @param localData Local app data
  */
-function getComments(localData) {
+function getComments(localData, next) {
     if(localData.postids) {
         var postData = {action: 'getComments', postids: localData.postids};
         if(localData.lastCommentUpdate) {
@@ -86,7 +91,11 @@ function getComments(localData) {
             var comments = $.parseJSON(res);
             renderComments(comments, localData.commentTemplate,
                 localData.users);
+            next(localData);
         });
+    }
+    else {
+        next(localData);
     }
 }
 
@@ -104,6 +113,7 @@ function renderComments(comments, template, users) {
             renderComment(comment, template);
         }
     });
+    jQuery("abbr.timeago").timeago();
 }
 
 /**
