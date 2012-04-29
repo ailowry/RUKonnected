@@ -63,6 +63,9 @@ body{
   margin-left:10px;
   margin-top:10px;
 }
+.leftbar ul {
+    list-style: none;
+}
 .UsersName{
  color: #3B5998;
   text-decoration: none;
