@@ -76,7 +76,6 @@ function getFeed(localData, next) {
  */
 function getComments(localData) {
     if(localData.postids) {
-        console.log(localData.postids);
         var postData = {action: 'getComments', postids: localData.postids};
         if(localData.lastCommentUpdate) {
             postData.lastCall = localData.lastCommentUpdate;
