@@ -130,7 +130,7 @@ function getComments($userid, $postids = null, $fromTime = null) {
     $friendsRegex = getFriendsRegex($userid);
     $friendsReq = $friendsRegex ? "OR UserID REGEXP '$friendsRegex'" : "";
 
-    $timeReq = ($fromTime ? "AND Time > FROM_UNIXTIME($fromTime))" : "");
+    $timeReq = ($fromTime ? "AND Time > FROM_UNIXTIME($fromTime)" : "");
 
     $qStr = "(SELECT * FROM Comments WHERE (UserID = $userid_v $friendsReq) " 
         . "$timeReq)";
@@ -139,7 +139,6 @@ function getComments($userid, $postids = null, $fromTime = null) {
         $qStr .= " UNION (SELECT * FROM Comments WHERE PostID REGEXP "
             . "'$postidregex' $timeReq)";
     }
-    //return $qStr;
     $result = mysql_query($qStr);
     return fetchAllRows($result);
 }

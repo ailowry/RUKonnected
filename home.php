@@ -21,8 +21,9 @@
   <body>
 	<div id="header">
      <img src="./imgs/logo.png" alt="RUConnected" border=0 />
-        <form id="friendfinder">
-            <input id="friendfinderinput" type="text" />
+        <form id="friendfinder"onsubmit="makeFriendRequest();" >
+            <input id="friendfinderinput" type="text"
+                 />
             <input id="friendrequestbutton" type="button"
                 value="Send friend request" onclick="makeFriendRequest()" />
         </form>
@@ -41,7 +42,14 @@
 		  	 </div>
 			 <div style="margin-left:12px;width:150px;border-bottom:#f0f0f0 1px solid;"></div> 	
 			 <div style="margin-left:10px;margin-top:7px;">
-				<a style="text-decoration:none;" href="friends.php">Your Friends</a>
+                <ul>
+                    <li>
+                        <a style="text-decoration:none;" href="friends.php">Your Friends</a>
+                    </li>
+                    <li>
+                        <a style="text-decoration:none;" href="messages.php">Messages</a>
+                    </li>
+                </ul>
 			 </div>
 	  	 </div>
          <div class="rightbar">

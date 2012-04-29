@@ -1,4 +1,4 @@
-var REFRESH_RATE = 5000;
+var REFRESH_RATE = 1000;
 var POST_CONTAINER_CLASS = 'postarea';
 var COMMENT_CONTAINER_CLASS = 'commentarea';
 var POST_TEMPLATE_URL = 'templates/post.stache';
@@ -46,7 +46,7 @@ function getFeed(localData, next) {
     if(localData.lastFeedUpdate) {
         postData.lastCall = localData.lastFeedUpdate;
     }
-    localData.lastFeedUpdate = getUnixTime();
+    localData.lastFeedUpdate = getUnixTime() - 30;
 
     $.post('api.php', postData, function(res) {
         var data = $.parseJSON(res);
@@ -81,7 +81,7 @@ function getComments(localData) {
         if(localData.lastCommentUpdate) {
             postData.lastCall = localData.lastCommentUpdate;
         }
-        localData.lastCommentUpdate = getUnixTime();
+        localData.lastCommentUpdate = getUnixTime() - 30;
 
         $.post('api.php', postData, function(res) {
             var comments = $.parseJSON(res);
@@ -206,7 +206,7 @@ function makePost(form) {
 
 /**
  * Posts a new comment
- * @param form The from that the comment is coming from
+ * @param form The form that the comment is coming from
  */
 function makeComment(form) {
     var postData = {
@@ -217,9 +217,6 @@ function makeComment(form) {
     $.post('api.php', postData, function(res) {
         if(res) {
             customAlert("Comment posted");
-			//fix & take out!
-			setTimeout(function() {window.location.reload();},1000);
-			
         }
     });
 }
