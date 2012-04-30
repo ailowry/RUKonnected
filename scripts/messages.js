@@ -16,11 +16,11 @@ $(document).ready(function() {
         var timers = function() {
             getFeed(localData);
         }
-    timers();
-		localData.timer = setInterval(timers, REFRESH_RATE);
-    localData.dateTimer = setInterval(function() {
-        jQuery("abbr.timeago").timeago();
-    }, 60000);
+        timers();
+        localData.timer = setInterval(timers, REFRESH_RATE);
+        localData.dateTimer = setInterval(function() {
+            jQuery("abbr.timeago").timeago();
+        }, 60000);
 	});	
 });
 
@@ -123,6 +123,7 @@ function renderPosts(posts, template, users) {
             renderPost(post, template);
         }
     });
+    jQuery("abbr.timeago").timeago();
 }
 
 /**
