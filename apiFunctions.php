@@ -120,6 +120,28 @@ function getFeed($userid, $fromTime = null, $limitPosts = true) {
     return $retval;
 }
 
+function getFriendFeed($userid, $fromTime = null, $limitPosts = true, $friendid = null) {
+    $userid_v = (int)$userid;
+    $friendid_v = (int)$friendid;
+    if($fromTime != null) {
+        $fromTime_v = (int)$fromTime;
+    }
+
+    $qStr = "SELECT * FROM Posts WHERE (UserID = $friendid_v "
+        . "OR FriendUserID = $friendid_v)"
+        . ($fromTime_v ? " AND Time > FROM_UNIXTIME($fromTime_v)" : '')
+        . " ORDER BY Time DESC" . ($limitPosts ? " LIMIT 20" : '');
+    $result = mysql_query($qStr);
+    $retval['posts'] = fetchAllRows($result);
+    $qStr2 = "SELECT Likes.UserID, Likes.PostID, Likes.Time "
+        . "FROM Likes JOIN Posts ON Likes.PostID = Posts.PostID "
+        . "WHERE (Posts.UserID = $friendid_v OR FriendUserID = $friendid_v)"
+        . ($fromTime_v ? " AND Likes.Time > FROM_UNIXTIME($fromTime_v)" : '');
+    $result2 = mysql_query($qStr2);
+    $retval['likes'] = fetchAllRows($result2);
+    return $retval;
+}
+
 /**
  * Gets all relevant comments for a user
  * @param $postids An array of post ids to query comments for
@@ -223,6 +245,14 @@ function getUserInfo($userids) {
         . "FROM Users WHERE id REGEXP '$usersRegex'";
     $result = mysql_query($qStr);
     return fetchAllRows($result);
+}
+
+function getFullUserInfo($userid) {
+    $userid_v = $userid;
+    $qStr = "SELECT CONCAT(fname, ' ', lname) AS displayname, username, "
+        . "Birthdate, email, lastActive, ProfilePicAddress "
+        . "FROM Users WHERE id = $userid_v";
+    return mysql_fetch_assoc(mysql_query($qStr));
 }
 
 function getSimilarNames($name) {

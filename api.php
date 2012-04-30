@@ -47,7 +47,12 @@
                 $input['postid']);
         }
         else if($action == 'getFeed') {
-            $response = getFeed($userid, $input['lastCall']);
+            if($input['friendid']) {
+                $response = getFriendFeed($userid, $input['lastCall'], true, $input['friendid']);
+            }
+            else { 
+                $response = getFeed($userid, $input['lastCall']);
+            }
         }
         else if($action == 'makeFriendRequest') {
             $response = makeFriendRequest($userid, $input['friendid']);
@@ -57,6 +62,9 @@
         }
         else if($action == 'getUserInfo') {
             $response = getUserInfo($input['userids']);
+        }
+        else if($action == 'getFullUserInfo') {
+            $response = getUserInfo($input['userid']);
         }
         else if($action == 'getComments') {
             if($input['postids']) {

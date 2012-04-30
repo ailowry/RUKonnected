@@ -12,6 +12,9 @@
         <script type="text/javascript" src="./scripts/feed.js"></script>
         <script type="text/javascript">
             $(document).ready(function() {
+                $.post('api.php', {action: 'getFullUserInfo', userid: <?php echo $_GET['id'] ?>}, function(res) {
+                    var userInfo = JSON.parse(res); 
+                });
                 startApp(<?php echo $_GET['id']; ?>);
             });
         </script>
@@ -28,7 +31,7 @@
              <form id="postform">
                 <textarea name="content" onfocus="if(this.value=='Make new post') {
                     this.value = ''}">Make new post</textarea>
-                <input type="button" value="Comment"
+                        <input type="button" value="Comment" friendid="<<?php echo $_GET['id'] ?>"
                     onclick="makePost($(this).parent())">
              </form>
              <div class="postarea">

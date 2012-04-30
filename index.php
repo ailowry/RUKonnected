@@ -8,7 +8,7 @@
   </head>
   <body>
     <?php require("chunks/guestHeader.php"); ?>
-    <div id="content">
+    <div id="contentindex">
        <div class="login-box">
         <form action="login-check.php" method="POST">
             <input tabindex="1" onfocus="if(this.value=='Username') this.value = ''"
@@ -21,9 +21,9 @@
      </div>
     <br />
     - OR -
-    <br />
-    <br />
+    <br /><br />
     <a href="regform.php">Register</a>
+    <br /><br />
     </div>
   </body>
 </html>

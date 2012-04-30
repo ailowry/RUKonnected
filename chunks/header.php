@@ -1,6 +1,6 @@
 <div id="header">
  <img src="./imgs/logo.png" alt="RUConnected" border=0 />
-    <form id="friendfinder"onsubmit="makeFriendRequest();" >
+    <form id="friendfinder"onsubmit="makeFriendRequest(); return false;" >
         <input id="friendfinderinput" type="text"
              />
         <input id="friendrequestbutton" type="button"
