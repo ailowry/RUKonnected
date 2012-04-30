@@ -45,11 +45,9 @@
 			 </div>
 	  	 </div>
          <div class="rightbar">
-             <form id="postform">
-                <textarea name="content" onfocus="if(this.value=='Make new post') {
-                    this.value = ''}">Make new post</textarea>
-                <input type="button" value="Comment"
-                    onclick="makePost($(this).parent())">
+             <form style="margin-left:25px;" id="postform">
+                <input type="text" name="content" size="45" value = "Make new post" onfocus="if(this.value=='Make new post') { this.value = ''}" />
+                <input type="button" value="Post" onclick="makePost($(this).parent())">
              </form>
              <div class="postarea">
              </div>

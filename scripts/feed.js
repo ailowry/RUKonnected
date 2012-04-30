@@ -1,4 +1,4 @@
-var REFRESH_RATE = 5000;
+var REFRESH_RATE = 1500;
 var POST_CONTAINER_CLASS = 'postarea';
 var COMMENT_CONTAINER_CLASS = 'commentarea';
 var POST_TEMPLATE_URL = 'templates/post.stache';
@@ -17,13 +17,14 @@ $(document).ready(function() {
     $localData.users = {};
     $localData.postids = [];
     generatePossibleFriends(); 
-
-    loadTemplates($localData, function(res) {
+	
+	loadTemplates($localData, function(res) {
         var timers = function() {
             getFeed($localData, getComments);
+			//$localData.timer = setInterval("timers()", REFRESH_RATE);
         }
         timers();
-        $localData.timer = setInterval("timers()", REFRESH_RATE);
+        //$localData.timer = setInterval(function() {getFeed($localData, getComments);}, REFRESH_RATE);
     });
 });
 
@@ -205,6 +206,8 @@ function makePost(form) {
         $(input).val('');
         if(res) {
             customAlert("Post successful");
+			//another fix ... wtf happend to our refresh!
+			setTimeout(function() {window.location.reload();},1000);
         }
     });
 }
