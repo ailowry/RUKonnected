@@ -7,7 +7,7 @@ var COMMENT_TEMPLATE_URL = 'templates/comment.stache';
 /**
  * Starts app
  */
-$(document).ready(function() {
+function startApp(friendID) {
     var localData = {};
     localData.users = {};
     localData.postids = [];
@@ -26,7 +26,7 @@ $(document).ready(function() {
             jQuery("abbr.timeago").timeago();
         }, 60000);
     });
-});
+}
 
 /**
  * Loads the templates needed for creating content

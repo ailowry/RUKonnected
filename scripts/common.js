@@ -28,6 +28,7 @@ function makeFriendRequest() {
     $.post('api.php', {action: 'makeFriend', friendname: name}, function(res) {
         if(res) {
             customAlert(res);
+            populateFriendsList();
         }
     });
 }

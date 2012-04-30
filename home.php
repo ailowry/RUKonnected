@@ -10,6 +10,11 @@
         <link type="text/css" href="./css/ui-lightness/jquery-ui-1.8.19.custom.css" rel="Stylesheet" />
         <?php require("chunks/scripts.php"); ?>	
         <script type="text/javascript" src="./scripts/feed.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                startApp();
+            });
+        </script>
 
 		<title>RUConnected | Home</title>
 	
