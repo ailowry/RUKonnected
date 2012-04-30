@@ -118,6 +118,7 @@ function renderPosts(posts, template, users) {
         if(!$('div[msgid="' + post.MessageID + '"]').length) {
             var uid = (post.SenderID != currentuser ? post.SenderID : post.ReceiverID);
 			post.LinkID = uid;
+            post.direction = uid == post.SenderID ? 'From' : 'To';
             post = $.extend(post, users[uid]);
             renderPost(post, template);
         }

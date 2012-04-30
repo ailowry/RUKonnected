@@ -221,6 +221,12 @@ a {
   width: 25px;
   height: 25px;
 }
+.messagedirection {
+    padding-top: 8px;
+    float: left;
+    display: inline-block;
+    vertical-align: bottom;
+}
 .alert {
   font-size: 20px;
   padding: 10px;

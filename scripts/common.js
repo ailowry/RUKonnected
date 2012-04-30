@@ -46,7 +46,6 @@ function populateFriendsList() {
         });
         getUserInfo(friendids, function(users) {
             $.each(users, function(key, user) {
-                console.log(user);
                 var li = '<li userid="' + key + '"><a href="friend.php?id='
                     + key + '">' + user.displayname + '</a></li>'
                 $('#friendslist').append($(li));
