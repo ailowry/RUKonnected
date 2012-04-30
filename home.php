@@ -27,7 +27,7 @@
          <div class="rightbar">
              <form id="postform" class="commentform" style="height:32px;">
                 <input name="content" onfocus="if(this.value=='Make new post') {
-                    this.value = ''}" value="Make new post" size=65 style="margin-left:20px;height:2em;"/>
+                    this.value = ''}" value="Make new post" size=85 style="margin-left:20px;height:2em;"/>
                 <input type="button" value="Make Post" onclick="makePost($(this).parent())">
              </form>
              <div class="postarea">
