@@ -74,6 +74,9 @@
             $friendid = getUserIdFromName($input['friendname']);
             $response = makeFriend($userid, $friendid);
         }
+        else if($action == 'getFriends') {
+            $response = getFriends($userid);
+        }
         else {
             $err = 'Error: Improper api call';
         }

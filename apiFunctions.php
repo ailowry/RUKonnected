@@ -163,6 +163,13 @@ function getFriendsRegex($userid) {
     return $friendsRegex;
 }
 
+function getFriends($userid) {
+    $userid_v = (int)$userid;
+    $qStr = "SELECT FriendID FROM Friends WHERE UserID = $userid_v";
+    $result = mysql_query($qStr);
+    return fetchAllRows($result);
+}
+
 function getPostIdsRegex($postids) {
     $postidregex = '';
     foreach($postids as $id) {

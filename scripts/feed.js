@@ -12,6 +12,7 @@ $(document).ready(function() {
     localData.users = {};
     localData.postids = [];
     generatePossibleFriends(); 
+    populateFriendsList();
 
     loadTemplates(localData, function(res) {
         var timers = function() {
@@ -175,26 +176,6 @@ function renderPost(post, template) {
  */
 function getUnixTime() {
     return Math.round(new Date().getTime() / 1000); 
-}
-
-/**
- * Gets the names of an array of users
- * @param userArray an array of userids to get display names for
- * @param next Callback
- * @returns An associative array of userids and corresponding display names
- */
-function getUserInfo(userArray, next) {
-    var postData = {action: 'getUserInfo'};
-    postData.userids = userArray;
-    $.post('api.php', postData, function(res) {
-        res = $.parseJSON(res);
-        var newUsers = {};
-        $.each(res, function(key, row) {
-            newUsers[row.id] =
-                {displayname: row.displayname, pic: row.ProfilePicAddress};
-        });
-        next(newUsers); 
-    });
 }
 
 /**

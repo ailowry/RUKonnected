@@ -14,5 +14,8 @@
                 <a style="text-decoration:none;" href="messages.php">Messages</a>
             </li>
         </ul>
+        <h3>Friends List</h3>
+        <ul id="friendslist">
+        </ul>
      </div>
  </div>

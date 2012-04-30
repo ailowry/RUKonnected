@@ -7,6 +7,10 @@ body{
   	font-family: Helvetica,Arial,Verdana,"Century Gothic";
 }
 
+a {
+    text-decoration: none;
+}
+
 #header {
 	width:960px;
   	margin-left:auto;
@@ -65,6 +69,9 @@ body{
 }
 .leftbar ul {
     list-style: none;
+}
+.leftbar h3 {
+    text-align: center;
 }
 .UsersName{
  color: #3B5998;
