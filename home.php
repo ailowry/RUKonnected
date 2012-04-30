@@ -25,7 +25,7 @@
     <div id="content">
          <?php require("chunks/leftbar.php"); ?>
          <div class="rightbar">
-             <form id="postform" class="commentform" style="height:32px;">
+             <form id="postform" class="commentform" style="height:32px;" onsubmit="makePost($(this)); return false;">
                 <input name="content" onfocus="if(this.value=='Make new post') {
                     this.value = ''}" value="Make new post" size=85 style="margin-left:20px;height:2em;"/>
                 <input type="button" value="Make Post" onclick="makePost($(this).parent())">
