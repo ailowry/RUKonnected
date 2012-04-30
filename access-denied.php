@@ -11,19 +11,21 @@
 	
   <body>
 	<div id="header">
-	 <h3><img src="./imgs/logo.png" alt="RUConnected" border=0 /><span style="margin-top:10px;font-size:22px;color:#fff;float:right;margin-right:15px;"> Access Denied </span></h3>
+   <h3><img src="./imgs/logo.png" alt="RUConnected" border=0 />
+      <span style="margin-top:10px;font-size:22px;color:#fff;float:right;margin-right:15px;"> Access Denied </span></h3>
 	 
 	</div>
-  	
-  	<div id="content">
-	  	 <div class="leftbar">
+  	<div id="content" style="text-align:center; font-size:60px; font-weight:bold; padding-bottom:10px;">
+	  	 <!--<div class="leftbar">
 		  	 <img src="imgs/denied.gif" alt="Access Denied" width=150px />
 		  	 <br/>
 		  	 <div style="margin-left:12px;width:150px;border-bottom:#f0f0f0 1px solid;"></div> 	 
 	  	 </div>
-	  	 <h1> Access Denied </h1>
+	  	 <span style="text-align:center; display:block; font-size:60px; font-weight:bold; padding:25px;"> Access Denied </div>
 	  	 
-  	</div>
-  
+  	</div>-->
+		  	 <br/>
+	  	 <div > Access Denied </div><br />
+		  	 <img src="imgs/denied.gif" alt="Access Denied" width=450px /></div>
   </body>
 </html>

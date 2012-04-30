@@ -9,9 +9,9 @@
 	</head>
 	
   <body>
-	<div id="header"><h3><img src="./imgs/logo.png" alt="RUConnected" border=0 /></h3></div>
-  	
-  	<div id="content">
+  <div id="header"><h3>
+    <img src="./imgs/logo.png" alt="RUConnected" border=0 /></h3></div>
+  	<div id="content" style="height:200px">
 	  	 <div class="login-box">
 	  	  <form action="login-check.php" method="POST">
 			<input tabindex="1" onfocus="if (this.value=='Username') this.value = ''" type=text value="Username" name="user" />    

@@ -20,7 +20,7 @@
 	
   <body>
 	<div id="header">
-     <img src="./imgs/logo.png" alt="RUConnected" border=0 />
+	 <a href="home.php"><img src="./imgs/logo.png" alt="RUConnected" title="RUConnected" border=0 /></a>
         <form id="friendfinder">
             <input id="friendfinderinput" type="text" />
             <input id="friendrequestbutton" type="button"
@@ -41,7 +41,8 @@
 		  	 </div>
 			 <div style="margin-left:12px;width:150px;border-bottom:#f0f0f0 1px solid;"></div> 	
 			 <div style="margin-left:10px;margin-top:7px;">
-				<a style="text-decoration:none;" href="friends.php">Your Friends</a>
+				<a style="text-decoration:none;" href="friends.php">Your Friends</a><br />
+				<a style="text-decoration:none;" href="messages.php">Your Messages</a><br />
 			 </div>
 	  	 </div>
          <div class="rightbar">
