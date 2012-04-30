@@ -25,8 +25,9 @@ function getNewestMessages($userid) {
 function getMessagesFromFriend($userid, $friendid) {
     $userid_v = (int)$userid; //logged in
 	$friendid_v = (int)$friendid; // friend that sent messages
-    $qStr = "SELECT * FROM Messages WHERE SenderID = $friendid_v "
-            . "AND ReceiverID = $userid_v order by time desc";
+    $qStr = "SELECT * FROM Messages WHERE (SenderID = $friendid_v "
+        . "AND ReceiverID = $userid_v) OR (SenderID = $userid_v AND "
+        . " ReceiverID = $friendid_v) order by time desc";
     $result = mysql_query($qStr);
     return fetchAllRows($result);
 }

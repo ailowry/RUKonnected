@@ -3,6 +3,6 @@
     <div class="commentprofileimg"><img src="{{pic}}" alt="avatar" name="userImage" /></div>
     <div class="commentdisplayname msglink" userid="{{LinkID}}">
       <h3>{{displayname}}</h3></div>
-    <abbr class="posttime timeago">{{Time}}</abbr>
+    <abbr class="posttime timeago" title="{{Time}}"></abbr>
     <div class="postcontent">{{Content}}</div>
 </div>            
