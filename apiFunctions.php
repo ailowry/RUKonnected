@@ -10,9 +10,9 @@ $db=mysql_select_db(DATABASE,$link)
 function getNewestMessages($userid) {
     $userid_v   = (int)$userid;	  //current user
     $qStr =  "SELECT t2.MessageID, t2.SenderID, t2.ReceiverID, t2.Content,"
-			 . " MAX(DATE_FORMAT(Time, '%M %e %l:%i%p')) as Time FROM ("
+			 . " MAX(Time) as Time FROM ("
 			 . " SELECT t1.MessageID, t1.SenderID, t1.ReceiverID, t1.Content, t1.Time FROM Messages t1"
-			 . " WHERE receiverid = $userid_v ORDER BY time desc) t2 GROUP BY senderid ORDER BY time ";
+			 . " WHERE receiverid = $userid_v OR senderid = $userid_v ORDER BY time desc) t2 GROUP BY senderid ORDER BY time ";
     $result = mysql_query($qStr);
 	return fetchAllRows($result);
 }	
@@ -61,8 +61,8 @@ function makePost($userid, $text, $friendid = null) {
  * @return True if post was success, error if post failed
  */
 function makeMessage($userid, $text, $friendid) {
-	$userid_v = (int)$userid;
-  $text_v = mysql_real_escape_string($text);
+    $userid_v = (int)$userid;
+    $text_v = mysql_real_escape_string($text);
 	if($friendid) {
 			$friendid_v = (int)$friendid;
 			$qStr = "INSERT INTO Messages(SenderID, ReceiverID, Content,  "
@@ -120,6 +120,28 @@ function getFeed($userid, $fromTime = null, $limitPosts = true) {
     return $retval;
 }
 
+function getFriendFeed($userid, $fromTime = null, $limitPosts = true, $friendid = null) {
+    $userid_v = (int)$userid;
+    $friendid_v = (int)$friendid;
+    if($fromTime != null) {
+        $fromTime_v = (int)$fromTime;
+    }
+
+    $qStr = "SELECT * FROM Posts WHERE (UserID = $friendid_v "
+        . "OR FriendUserID = $friendid_v)"
+        . ($fromTime_v ? " AND Time > FROM_UNIXTIME($fromTime_v)" : '')
+        . " ORDER BY Time DESC" . ($limitPosts ? " LIMIT 20" : '');
+    $result = mysql_query($qStr);
+    $retval['posts'] = fetchAllRows($result);
+    $qStr2 = "SELECT Likes.UserID, Likes.PostID, Likes.Time "
+        . "FROM Likes JOIN Posts ON Likes.PostID = Posts.PostID "
+        . "WHERE (Posts.UserID = $friendid_v OR FriendUserID = $friendid_v)"
+        . ($fromTime_v ? " AND Likes.Time > FROM_UNIXTIME($fromTime_v)" : '');
+    $result2 = mysql_query($qStr2);
+    $retval['likes'] = fetchAllRows($result2);
+    return $retval;
+}
+
 /**
  * Gets all relevant comments for a user
  * @param $postids An array of post ids to query comments for
@@ -127,10 +149,13 @@ function getFeed($userid, $fromTime = null, $limitPosts = true) {
  */
 function getComments($userid, $postids = null, $fromTime = null) {
     $userid_v = $userid;
+    if($fromTime != null) {
+        $fromTime_v = (int)$fromTime;
+    }
     $friendsRegex = getFriendsRegex($userid);
     $friendsReq = $friendsRegex ? "OR UserID REGEXP '$friendsRegex'" : "";
 
-    $timeReq = ($fromTime ? "AND Time > FROM_UNIXTIME($fromTime))" : "");
+    $timeReq = ($fromTime_v ? "AND Time > FROM_UNIXTIME($fromTime_v)" : "");
 
     $qStr = "(SELECT * FROM Comments WHERE (UserID = $userid_v $friendsReq) " 
         . "$timeReq)";
@@ -139,7 +164,6 @@ function getComments($userid, $postids = null, $fromTime = null) {
         $qStr .= " UNION (SELECT * FROM Comments WHERE PostID REGEXP "
             . "'$postidregex' $timeReq)";
     }
-    //return $qStr;
     $result = mysql_query($qStr);
     return fetchAllRows($result);
 }
@@ -159,6 +183,13 @@ function getFriendsRegex($userid) {
         $friendsRegex .= ($friendsRegex === '') ? "(^$fid$)" : "|(^$fid$)";
     }
     return $friendsRegex;
+}
+
+function getFriends($userid) {
+    $userid_v = (int)$userid;
+    $qStr = "SELECT FriendID FROM Friends WHERE UserID = $userid_v";
+    $result = mysql_query($qStr);
+    return fetchAllRows($result);
 }
 
 function getPostIdsRegex($postids) {
@@ -214,6 +245,14 @@ function getUserInfo($userids) {
         . "FROM Users WHERE id REGEXP '$usersRegex'";
     $result = mysql_query($qStr);
     return fetchAllRows($result);
+}
+
+function getFullUserInfo($userid) {
+    $userid_v = $userid;
+    $qStr = "SELECT CONCAT(fname, ' ', lname) AS displayname, username, "
+        . "Birthdate, email, lastActive, ProfilePicAddress "
+        . "FROM Users WHERE id = $userid_v";
+    return mysql_fetch_assoc(mysql_query($qStr));
 }
 
 function getSimilarNames($name) {

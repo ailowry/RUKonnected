@@ -1,4 +1,4 @@
-var REFRESH_RATE = 10000;
+var REFRESH_RATE = 1000;
 var MESSAGE_CONTAINER_CLASS = 'messagearea';
 var MESSAGE_TEMPLATE_URL = 'templates/message.stache';
 
@@ -8,16 +8,20 @@ var MESSAGE_TEMPLATE_URL = 'templates/message.stache';
 $(document).ready(function() {
     var localData = {};
     localData.users = {};
+    generatePossibleFriends(); 
+    populateFriendsList();
 
     loadTemplates(localData, function(res) {
         getFeed(localData);
         var timers = function() {
             getFeed(localData);
         }
+    timers();
 		localData.timer = setInterval(timers, REFRESH_RATE);
-		
+    localData.dateTimer = setInterval(function() {
+        jQuery("abbr.timeago").timeago();
+    }, 60000);
 	});	
-	
 });
 
 /**

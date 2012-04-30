@@ -1,13 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<?php
-	ini_set('display_errors',true); 
-	ini_set('display_startup_errors',true); 
-	error_reporting (E_ALL|E_STRICT);
-?>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="myStyle.css"/>
+<link rel="stylesheet" type="text/css" href="style.css"/>
 <link href='http://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
 <title>RUConnected</title>
 <style type="text/css">
@@ -63,7 +58,7 @@
 		{
 			if (match2 === true || pwdToCheck1 !== pwdToCheck2)
 			{
-				alert("Invalid Password");
+				alert("Passwords do not match");
 			}
 		}
 	}
@@ -80,15 +75,11 @@
 		}
 		
 		$mailPat = '/^([a-zA-Z0-9\.\-])+\@(([a-zA-Z0-9\-])+\.)([[:alnum:]]{2,4})+$/';
+        
 		$validMail=preg_match($mailPat,$_POST["email"]);
 		if ($validMail == 0)
 		{
 			$errMsgs['email'] = "Invalid Email.";
-		}
-		
-		if ($_POST['gender'] !== 'male' && $_POST['gender'] !== 'female')
-		{
-			$errMsgs['gender'] = 'Gender Not Set.';
 		}
 		
 		$validPwd1 = preg_match($namePat,$_POST['pwd1']);
@@ -106,48 +97,52 @@
 		{
 			$errMsgs['pwd2'] = 'Passwords Do Not Match';
 		}
+        if($_POST['fname'] == '') {
+			$errMsgs['fname'] = 'First name is invalid';
+        }
+        if($_POST['lname'] == '') {
+			$errMsgs['lname'] = 'Last name is invalid';
+        }
 	}	
 		$formIsValid = array_key_exists('i-came-from-form',$_POST) && !$errMsgs;
+    if($formIsValid) {
+        require_once('config.php');
+
+        $link=mysql_connect(HOST, USERNAME, PASSWORD)
+            or die("Could not connect: " . mysql_error());
+        $db=mysql_select_db(DATABASE,$link)
+            or die("Could not connect: " . mysql_error());
+        $username_v = mysql_real_escape_string($_POST['usrname']);
+        $password_v = md5($_POST['pwd1']);
+        $fname_v = mysql_real_escape_string($_POST['fname']);
+        $lname_v = mysql_real_escape_string($_POST['lname']);
+        $email_v = mysql_real_escape_string($_POST['email']);
+        $qStr = "INSERT INTO Users(username, password, fname, lname, BirthDay, ProfilePicAddress, email) "
+            . "VALUES('$username_v', '$password_v', '$fname_v', '$lname_v', '1987-05-24', 'http://www.rnorvell.com/projects/smile/smile.png', '$email_v')";
+        $success = mysql_query($qStr);
+        if($success) {
+			header("location: regsuccess.php");
+        }
+        else {
+            $flash = mysql_error();
+        }
+    }
 ?>
 
 <body>
-	<div id="header">
-    <span class="logo">RU<em><span class="ru">Connected</span></em></span>
-			<input type="button" name="friendrequests" value="Friend Requests" />
-			<input type="button" name="messages" value="Messages" />
-			<input type="button" name="notifications" value="Notifications" />
-			<a href="logout" name="logout" />Logout</a>
-  </div>
-  <div id="container">
+    <?php require("chunks/guestHeader.php"); ?>
+  <div id="content">
     <div id="leftcol">
       &nbsp;			
     </div>
     <div id="content">
+            <div id="flash"><?php echo $flash; ?></div>
 			<form action="regform.php" method="post" name="registration">
             	<table>
-                	<tr>
-                    	<td>E-Mail: </td>
-                    	<td>
-                        	<input type="text" name="email" onblur="validateEmail()" size="20"
-							value="<?php
-									if(isset($_POST['email']))
-									{
-										echo htmlspecialchars($_POST['email']);
-									} ?>" />
-                        </td>
-						<td class="error">
-							<?php
-								if(isset($errMsgs['email']))
-								{
-									echo $errMsgs['email'];
-								}
-							?>
-						</td>
-                    </tr>
                     <tr>
                     	<td>User Name: </td>
                         <td>
-							<input type="text" name="usrname" onblur="validateName()" size="20"
+							<input type="text" name="usrname" onblur="if(this.value != '') validateName()" size="20"
 							value="<?php if (isset($_POST['usrname'])){
 								echo htmlspecialchars($_POST['usrname']);}
 							?>" />
@@ -157,25 +152,6 @@
 								if(isset($errMsgs['usrname']))
 								{
 									echo $errMsgs['usrname'];
-								}
-							?>
-						</td>
-                    </tr>
-                    <tr>
-                    	<td>Gender: </td>
-                        <td>
-                        	<select name="gender"
-									value="<?php if (isset($_POST['gender'])){
-									echo htmlspecialchars($_POST['gender']);}?>">
-                            	<option value="male">Male</option>
-                                <option value="female">Female</option>
-                            </select>
-                        </td>
-						<td class="error">
-							<?php
-								if(isset($errMsgs['gender']))
-								{
-									echo $errMsgs['gender'];
 								}
 							?>
 						</td>
@@ -207,6 +183,64 @@
 								}
 							?>
 						</td>
+                    </tr>
+                    <tr><td>-</td></tr>
+                	<tr>
+                    	<td>First Name: </td>
+                    	<td>
+                        	<input type="text" name="fname"  size="20"
+							value="<?php
+									if(isset($_POST['fname']))
+									{
+										echo htmlspecialchars($_POST['fname']);
+									} ?>" />
+                        </td>
+						<td class="error">
+							<?php
+								if(isset($errMsgs['fname']))
+								{
+									echo $errMsgs['fname'];
+								}
+							?>
+						</td>
+                    </tr>
+                	<tr>
+                    	<td>Last Name: </td>
+                    	<td>
+                        	<input type="text" name="lname"  size="20"
+							value="<?php
+									if(isset($_POST['lname']))
+									{
+										echo htmlspecialchars($_POST['lname']);
+									} ?>" />
+                        </td>
+						<td class="error">
+							<?php
+								if(isset($errMsgs['lname']))
+								{
+									echo $errMsgs['lname'];
+								}
+							?>
+						</td>
+                    </tr>
+                    <tr>
+                        <td>E-Mail: </td>
+                        <td>
+                            <input type="text" name="email" onblur="validateEmail()" size="20"
+                            value="<?php
+                                    if(isset($_POST['email']))
+                                    {
+                                        echo htmlspecialchars($_POST['email']);
+                                    } ?>" />
+                        </td>
+                        <td class="error">
+                            <?php
+                                if(isset($errMsgs['email']))
+                                {
+                                    echo $errMsgs['email'];
+                                }
+                            ?>
+                        </td>
                     </tr>
                     <tr>
                     	<td><input type="submit" value="Submit" /></td>

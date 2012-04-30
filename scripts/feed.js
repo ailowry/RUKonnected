@@ -1,4 +1,4 @@
-var REFRESH_RATE = 1500;
+var REFRESH_RATE = 2000;
 var POST_CONTAINER_CLASS = 'postarea';
 var COMMENT_CONTAINER_CLASS = 'commentarea';
 var POST_TEMPLATE_URL = 'templates/post.stache';
@@ -7,26 +7,27 @@ var COMMENT_TEMPLATE_URL = 'templates/comment.stache';
 /**
  * Starts app
  */
- //this should come in handly later (scope)
- var timers = function() {
-            getFeed($localData, getComments);
-        }
- 
-$(document).ready(function() {
-    $localData = {};
-    $localData.users = {};
-    $localData.postids = [];
+function startApp(friendID) {
+    var localData = {};
+    localData.friendid = friendID;
+    localData.users = {};
+    localData.postids = [];
     generatePossibleFriends(); 
-	
-	loadTemplates($localData, function(res) {
+    populateFriendsList();
+
+    loadTemplates(localData, function(res) {
         var timers = function() {
-            getFeed($localData, getComments);
-			//$localData.timer = setInterval("timers()", REFRESH_RATE);
+            getFeed(localData, function(localData) {
+                getComments(localData, function(localData) {});
+            });
         }
         timers();
-        //$localData.timer = setInterval(function() {getFeed($localData, getComments);}, REFRESH_RATE);
+        localData.timer = setInterval(timers, REFRESH_RATE);
+        localData.dateTimer = setInterval(function() {
+            jQuery("abbr.timeago").timeago();
+        }, 60000);
     });
-});
+}
 
 /**
  * Loads the templates needed for creating content
@@ -52,7 +53,8 @@ function getFeed($localData, next) {
     if($localData.lastFeedUpdate) {
         postData.lastCall = $localData.lastFeedUpdate;
     }
-    $localData.lastFeedUpdate = getUnixTime();
+    postData.friendid = localData.friendid;
+    localData.lastFeedUpdate = getUnixTime() - 30;
 
     $.post('api.php', postData, function(res) {
         var data = $.parseJSON(res);
@@ -80,20 +82,23 @@ function getFeed($localData, next) {
  * Gets all comments by friends and on friend's posts
  * @param $localData Local app data
  */
-function getComments($localData) {
-    if($localData.postids) {
-        console.log($localData.postids);
-        var postData = {action: 'getComments', postids: $localData.postids};
-        if($localData.lastCommentUpdate) {
-            postData.lastCall = $localData.lastCommentUpdate;
+function getComments(localData, next) {
+    if(localData.postids) {
+        var postData = {action: 'getComments', postids: localData.postids};
+        if(localData.lastCommentUpdate) {
+            postData.lastCall = localData.lastCommentUpdate;
         }
-        $localData.lastCommentUpdate = getUnixTime();
+        localData.lastCommentUpdate = getUnixTime() - 30;
 
         $.post('api.php', postData, function(res) {
             var comments = $.parseJSON(res);
-            renderComments(comments, $localData.commentTemplate,
-                $localData.users);
+            renderComments(comments, localData.commentTemplate,
+                localData.users);
+            next(localData);
         });
+    }
+    else {
+        next(localData);
     }
 }
 
@@ -111,6 +116,7 @@ function renderComments(comments, template, users) {
             renderComment(comment, template);
         }
     });
+    jQuery("abbr.timeago").timeago();
 }
 
 /**
@@ -175,26 +181,6 @@ function getUnixTime() {
 }
 
 /**
- * Gets the names of an array of users
- * @param userArray an array of userids to get display names for
- * @param next Callback
- * @returns An associative array of userids and corresponding display names
- */
-function getUserInfo(userArray, next) {
-    var postData = {action: 'getUserInfo'};
-    postData.userids = userArray;
-    $.post('api.php', postData, function(res) {
-        res = $.parseJSON(res);
-        var newUsers = {};
-        $.each(res, function(key, row) {
-            newUsers[row.id] =
-                {displayname: row.displayname, pic: row.ProfilePicAddress};
-        });
-        next(newUsers); 
-    });
-}
-
-/**
  * Makes a post to api from form
  * @param form the form that is sending data
  */
@@ -214,7 +200,7 @@ function makePost(form) {
 
 /**
  * Posts a new comment
- * @param form The from that the comment is coming from
+ * @param form The form that the comment is coming from
  */
 function makeComment(form) {
     var postData = {
@@ -225,8 +211,6 @@ function makeComment(form) {
     $.post('api.php', postData, function(res) {
         if(res) {
             customAlert("Comment posted");
-			//fix & take out!
-			setTimeout(function() {window.location.reload();},1000);
         }
     });
 }
