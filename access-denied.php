@@ -10,6 +10,7 @@
 	</head>
 	
   <body>
+<<<<<<< HEAD:access-denied.php
 	<div id="header">
    <h3><img src="./imgs/logo.png" alt="RUConnected" border=0 />
       <span style="margin-top:10px;font-size:22px;color:#fff;float:right;margin-right:15px;"> Access Denied </span></h3>
@@ -17,6 +18,11 @@
 	</div>
   	<div id="content" style="text-align:center; font-size:60px; font-weight:bold; padding-bottom:10px;">
 	  	 <!--<div class="leftbar">
+=======
+    <?php require("chunks/guestHeader.php"); ?>
+  	<div id="content">
+	  	 <div class="leftbar">
+>>>>>>> eefdabddeabda11ee3f3b7b3ae778b89dd0e1cae:access-denied.php
 		  	 <img src="imgs/denied.gif" alt="Access Denied" width=150px />
 		  	 <br/>
 		  	 <div style="margin-left:12px;width:150px;border-bottom:#f0f0f0 1px solid;"></div> 	 

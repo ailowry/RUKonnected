@@ -5,9 +5,7 @@
     <div class="postdisplayname">
         <h3>{{displayname}}</h3>
     </div>
-    <div class="posttime">
-        {{Time}}
-    </div>
+    <abbr class="posttime timeago" title="{{Time}}"></abbr>
     <div class="postcontent">
         {{PostContent}}
     </div>

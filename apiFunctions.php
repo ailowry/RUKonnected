@@ -61,8 +61,8 @@ function makePost($userid, $text, $friendid = null) {
  * @return True if post was success, error if post failed
  */
 function makeMessage($userid, $text, $friendid) {
-	$userid_v = (int)$userid;
-  $text_v = mysql_real_escape_string($text);
+    $userid_v = (int)$userid;
+    $text_v = mysql_real_escape_string($text);
 	if($friendid) {
 			$friendid_v = (int)$friendid;
 			$qStr = "INSERT INTO Messages(SenderID, ReceiverID, Content,  "
@@ -127,10 +127,13 @@ function getFeed($userid, $fromTime = null, $limitPosts = true) {
  */
 function getComments($userid, $postids = null, $fromTime = null) {
     $userid_v = $userid;
+    if($fromTime != null) {
+        $fromTime_v = (int)$fromTime;
+    }
     $friendsRegex = getFriendsRegex($userid);
     $friendsReq = $friendsRegex ? "OR UserID REGEXP '$friendsRegex'" : "";
 
-    $timeReq = ($fromTime ? "AND Time > FROM_UNIXTIME($fromTime))" : "");
+    $timeReq = ($fromTime_v ? "AND Time > FROM_UNIXTIME($fromTime_v)" : "");
 
     $qStr = "(SELECT * FROM Comments WHERE (UserID = $userid_v $friendsReq) " 
         . "$timeReq)";
@@ -139,7 +142,6 @@ function getComments($userid, $postids = null, $fromTime = null) {
         $qStr .= " UNION (SELECT * FROM Comments WHERE PostID REGEXP "
             . "'$postidregex' $timeReq)";
     }
-    //return $qStr;
     $result = mysql_query($qStr);
     return fetchAllRows($result);
 }
@@ -159,6 +161,13 @@ function getFriendsRegex($userid) {
         $friendsRegex .= ($friendsRegex === '') ? "(^$fid$)" : "|(^$fid$)";
     }
     return $friendsRegex;
+}
+
+function getFriends($userid) {
+    $userid_v = (int)$userid;
+    $qStr = "SELECT FriendID FROM Friends WHERE UserID = $userid_v";
+    $result = mysql_query($qStr);
+    return fetchAllRows($result);
 }
 
 function getPostIdsRegex($postids) {
