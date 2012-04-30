@@ -106,18 +106,14 @@ a {
 }
 
 .rightbar{
-<<<<<<< HEAD:style.css
   min-width: 745px;
   min-height: 100%;
-  float: left;
   display: inline-block;
   padding:10px 10px 10px 10px;
-=======
     min-width: 608px;
     height: 100%;
     display: inline-block;
     vertical-align: top;
->>>>>>> 2c2c670a525a275668315cfa5871b10292f97c5c:style.css
 }
 .mainpost{
   border: 1px solid gray;
@@ -183,17 +179,12 @@ a {
   float:right;
   font-weight:bold;
 }
-<<<<<<< HEAD:style.css
-.commentarea {
-=======
-
-
+.commentarea {}
 .postarea {
     text-align: left;
 }
 .messagearea {
     text-align: left;
->>>>>>> 2c2c670a525a275668315cfa5871b10292f97c5c:style.css
 }
 .comment {
   background-color:#c8d9ed;
