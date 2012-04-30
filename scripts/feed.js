@@ -192,8 +192,6 @@ function makePost(form) {
         $(input).val('');
         if(res) {
             customAlert("Post successful");
-			//another fix ... wtf happend to our refresh!
-			setTimeout(function() {window.location.reload();},1000);
         }
     });
 }
