@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="style.css"/>
 <link href='http://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
-<title>RUConnected</title>
+<title>RUConnected | Registration</title>
 <style type="text/css">
 	.error
 	{
@@ -132,13 +132,10 @@
 <body>
     <?php require("chunks/guestHeader.php"); ?>
   <div id="content">
-    <div id="leftcol">
-      &nbsp;			
-    </div>
-    <div id="content">
-            <div id="flash"><?php echo $flash; ?></div>
+      <div class="regform">
 			<form action="regform.php" method="post" name="registration">
-            	<table>
+              <table>
+              <caption><strong>Registration Form</strong></caption>
                     <tr>
                     	<td>User Name: </td>
                         <td>
@@ -184,7 +181,7 @@
 							?>
 						</td>
                     </tr>
-                    <tr><td>-</td></tr>
+                    <tr><td colspan="2"><hr></td></tr>
                 	<tr>
                     	<td>First Name: </td>
                     	<td>
@@ -243,13 +240,14 @@
                         </td>
                     </tr>
                     <tr>
-                    	<td><input type="submit" value="Submit" /></td>
-                        <td><input type="reset" value="Clear Form" /></td>
+                      <td></td>
+                    	<td><input type="submit" value="Submit" style="width:80px"/>&nbsp;
+                        <input type="reset" value="Clear Form" style="width:80px"/></td>
                     </tr>
                 </table>
 				<input type="hidden" name="i-came-from-form" value="true" />
             </form>
     </div>
-	</div>
+    </div>
 </body>
 </html>
