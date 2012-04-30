@@ -25,6 +25,7 @@ a {
 #content{
   background-color:#FFF;
   width:960px;
+  height: 100%;
   margin-left:auto;
   margin-right:auto;
 }
@@ -69,6 +70,8 @@ a {
 }
 .leftbar ul {
     list-style: none;
+    padding: 0;
+    text-align: center;
 }
 .leftbar h3 {
     text-align: center;
