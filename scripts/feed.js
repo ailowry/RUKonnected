@@ -31,27 +31,27 @@ function startApp(friendID) {
 
 /**
  * Loads the templates needed for creating content
- * @param $localData Local app data
+ * @param localData Local app data
  * @param next Callback
  */
-function loadTemplates($localData, next) {
+function loadTemplates(localData, next) {
     $.get(POST_TEMPLATE_URL, function(res) {
-        $localData.postTemplate = res;
+        localData.postTemplate = res;
         $.get(COMMENT_TEMPLATE_URL, function(res2) {
-            $localData.commentTemplate = res2;
-            next($localData);
+            localData.commentTemplate = res2;
+            next(localData);
         });
     });
 }
 
 /**
  * Renders wall from api feed
- * @param $localData Local app data
+ * @param localData Local app data
  */
-function getFeed($localData, next) {
+function getFeed(localData, next) {
     var postData = {action: 'getFeed'};
-    if($localData.lastFeedUpdate) {
-        postData.lastCall = $localData.lastFeedUpdate;
+    if(localData.lastFeedUpdate) {
+        postData.lastCall = localData.lastFeedUpdate;
     }
     postData.friendid = localData.friendid;
     localData.lastFeedUpdate = getUnixTime() - 30;
@@ -59,28 +59,28 @@ function getFeed($localData, next) {
     $.post('api.php', postData, function(res) {
         var data = $.parseJSON(res);
         $.each(data.posts, function(key, post) {
-            $localData.postids.push(post.PostID);
+            localData.postids.push(post.PostID);
         });
         var unknownUsers = checkPostsForUnknownUsers(data.posts,
-            $localData.users);
+            localData.users);
         if(unknownUsers) {
             getUserInfo(unknownUsers, function(newNames) {
-                $localData.users = $.extend($localData.users, newNames);
-                renderPosts(data.posts, $localData.postTemplate,
-                    $localData.users);
-                next($localData);
+                localData.users = $.extend(localData.users, newNames);
+                renderPosts(data.posts, localData.postTemplate,
+                    localData.users);
+                next(localData);
             });
         }
         else {
-            renderPosts(data.posts, $localData.postTemplate, $localData.users);
-            next($localData);
+            renderPosts(data.posts, localData.postTemplate, localData.users);
+            next(localData);
         }
     });
 }
 
 /**
  * Gets all comments by friends and on friend's posts
- * @param $localData Local app data
+ * @param localData Local app data
  */
 function getComments(localData, next) {
     if(localData.postids) {
