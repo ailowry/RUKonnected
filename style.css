@@ -25,7 +25,13 @@ a {
 #content{
   background-color:#FFF;
   width:960px;
-  height: 100%;
+  margin-left:auto;
+  margin-right:auto;
+  text-align: left;
+}
+#contentindex{
+  background-color:#FFF;
+  width:960px;
   margin-left:auto;
   margin-right:auto;
   text-align: center;
@@ -47,7 +53,8 @@ a {
   width:175px;
   height:100%;
   background-color:rgb(229,229,219);
-  float:left;	
+  display:inline-block;
+  vertical-align: top;
 }
 
 .leftbar img{
@@ -87,8 +94,8 @@ a {
 .rightbar{
     min-width: 608px;
     height: 100%;
-    float: left;
     display: inline-block;
+    vertical-align: top;
 }
 .mainpost{
     border: 1px solid gray;
@@ -156,7 +163,11 @@ a {
 }
 
 
-.commentarea {
+.postarea {
+    text-align: left;
+}
+.messagearea {
+    text-align: left;
 }
 .comment {
     background-color:#e5edb;
