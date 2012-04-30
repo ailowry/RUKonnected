@@ -19,6 +19,11 @@
                 style="color:#000;width:100px;" value="Login" /><br/>
       </form>
      </div>
+    <br />
+    - OR -
+    <br />
+    <br />
+    <a href="regform.php">Register</a>
     </div>
   </body>
 </html>

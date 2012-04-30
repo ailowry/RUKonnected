@@ -28,6 +28,7 @@ a {
   height: 100%;
   margin-left:auto;
   margin-right:auto;
+  text-align: center;
 }
 
 .login-box{
@@ -222,4 +223,7 @@ a {
 }
 .underline {
   text-decoration:underline;
+}
+#flash {
+    background-color: red;
 }
