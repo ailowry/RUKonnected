@@ -8,7 +8,7 @@
   </head>
   <body>
     <?php require("chunks/guestHeader.php"); ?>
-    <div id="content" style="padding-top:15px; padding-bottom:15px;">
+    <div id="contentindex">
        <div class="login-box">
         <span>Welcome to RUConnected!</span><br />
         <form action="login-check.php" method="POST">
@@ -20,6 +20,11 @@
                 style="color:#000;width:100px;" value="Login" /><br/>
       </form>
      </div>
+    <br />
+    - OR -
+    <br /><br />
+    <a href="regform.php">Register</a>
+    <br /><br />
     </div>
   </body>
 </html>

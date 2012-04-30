@@ -1,4 +1,4 @@
-var REFRESH_RATE = 1000;
+var REFRESH_RATE = 2000;
 var POST_CONTAINER_CLASS = 'postarea';
 var COMMENT_CONTAINER_CLASS = 'commentarea';
 var POST_TEMPLATE_URL = 'templates/post.stache';
@@ -7,8 +7,9 @@ var COMMENT_TEMPLATE_URL = 'templates/comment.stache';
 /**
  * Starts app
  */
-$(document).ready(function() {
+function startApp(friendID) {
     var localData = {};
+    localData.friendid = friendID;
     localData.users = {};
     localData.postids = [];
     generatePossibleFriends(); 
@@ -26,7 +27,7 @@ $(document).ready(function() {
             jQuery("abbr.timeago").timeago();
         }, 60000);
     });
-});
+}
 
 /**
  * Loads the templates needed for creating content
@@ -52,6 +53,7 @@ function getFeed(localData, next) {
     if(localData.lastFeedUpdate) {
         postData.lastCall = localData.lastFeedUpdate;
     }
+    postData.friendid = localData.friendid;
     localData.lastFeedUpdate = getUnixTime() - 30;
 
     $.post('api.php', postData, function(res) {
