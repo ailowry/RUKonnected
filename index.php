@@ -8,8 +8,9 @@
   </head>
   <body>
     <?php require("chunks/guestHeader.php"); ?>
-    <div id="content">
+    <div id="content" style="padding-top:15px; padding-bottom:15px;">
        <div class="login-box">
+        <span>Welcome to RUConnected!</span><br />
         <form action="login-check.php" method="POST">
             <input tabindex="1" onfocus="if(this.value=='Username') this.value = ''"
                 type="text" value="Username" name="user" />

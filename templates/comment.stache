@@ -1,5 +1,5 @@
 <div class="comment" postid="{{PostID}}" commentid="{{CommentID}}">
-    <div class="commentprofileimg"><img src="{{pic}}" alt="avatar" name="userImage" width="24" height="24" style="background-color: #FF0000" /></div>
+    <div class="commentprofileimg"><img src="{{pic}}" alt="avatar" name="userImage"  /></div>
     <div class="commentdisplayname"><h3>{{displayname}}</h3></div>
     <abbr class="commenttime timeago" title="{{Time}}"></abbr>
     <div class="commentcontent">{{Comment}}</div>

@@ -20,7 +20,7 @@
     <div id="content">
          <?php require("chunks/leftbar.php"); ?>
          <div class="rightbar">
-             <form id="postform">
+             <form id="postform" class="commentform">
                 <textarea name="content" onfocus="if(this.value=='Make new post') {
                     this.value = ''}">Make new post</textarea>
                 <input type="button" value="Comment"

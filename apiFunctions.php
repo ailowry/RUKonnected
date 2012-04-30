@@ -10,9 +10,9 @@ $db=mysql_select_db(DATABASE,$link)
 function getNewestMessages($userid) {
     $userid_v   = (int)$userid;	  //current user
     $qStr =  "SELECT t2.MessageID, t2.SenderID, t2.ReceiverID, t2.Content,"
-			 . " MAX(DATE_FORMAT(Time, '%M %e %l:%i%p')) as Time FROM ("
+			 . " MAX(Time) as Time FROM ("
 			 . " SELECT t1.MessageID, t1.SenderID, t1.ReceiverID, t1.Content, t1.Time FROM Messages t1"
-			 . " WHERE receiverid = $userid_v ORDER BY time desc) t2 GROUP BY senderid ORDER BY time ";
+			 . " WHERE receiverid = $userid_v OR senderid = $userid_v ORDER BY time desc) t2 GROUP BY senderid ORDER BY time ";
     $result = mysql_query($qStr);
 	return fetchAllRows($result);
 }	

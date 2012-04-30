@@ -1,57 +1,70 @@
-@charset "utf-8";
+n@charset "utf-8";
 /* CSS Document */
-html {height:100%;}
+html {
+  height:100% !important;
+  min-height:100% !important;
+}
 body{
-	background-color:rgb(0,31,68);
-  	height:100%;
-  	font-family: Helvetica,Arial,Verdana,"Century Gothic";
+  background-color:rgb(0,31,68);
+  height:100% !important;
+  min-height:100% !important;
+  font-family: Helvetica,Arial,Verdana,"Century Gothic";
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 #header {
-	width:960px;
-  	margin-left:auto;
-  	margin-right:auto;
-	height:45px;
-	background-color:#c2011b;
-	color:#fff;
-	font-size:35px;
-  	border-style:groove;
+  width:960px;
+  margin-left:auto;
+  margin-right:auto;
+  height:45px;
+  background-color:#c2011b;
+  color:#fff;
+  font-size:35px;
+  border-style:groove;
 }
 #header h3{margin-top:0px;}
 #content{
   background-color:#FFF;
   width:960px;
-  height: 100%;
+  min-height: 100%;
+  height:100%;
   margin-left:auto;
   margin-right:auto;
 }
 
 .login-box{
-	padding-top:30px;
-	width:320px;
-	margin-left:auto;
-  	margin-right:auto;
+  padding:30px;
+  width:320px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  margin-left:auto;
+  margin-right:auto;
+  background-color:rgb(229,229,219);
+  text-align:center;
+  border:1px solid #000;
 }
 
 .login-box input{
-	width:270px;
-	height:25px;
+  width:270px;
+  height:25px;
+  margin:5px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
 }
 
 .leftbar{
   width:175px;
-  height:100%;
+  min-height:100%;
+  height: auto !important;
   background-color:rgb(229,229,219);
   float:left;	
 }
-
 .leftbar img{
-	margin-top:10px;
-	margin-left:12px;
+  margin-top:10px;
+  margin-left:12px;
 }
 
 .leftbar span{
@@ -69,156 +82,153 @@ a {
   margin-top:10px;
 }
 .leftbar ul {
-    list-style: none;
-    padding: 0;
-    text-align: center;
+  list-style: none;
+  padding: 0;
+  text-align: center;
 }
 .leftbar h3 {
-    text-align: center;
+  text-align: center;
 }
 .UsersName{
- color: #3B5998;
+  color: #3B5998;
   text-decoration: none;
   font-size:20px;
   text-align:center;
 }
 
 .rightbar{
-    min-width: 608px;
-    height: 100%;
-    float: left;
-    display: inline-block;
+  min-width: 745px;
+  min-height: 100%;
+  float: left;
+  display: inline-block;
+  padding:10px 10px 10px 10px;
 }
 .mainpost{
-    border: 1px solid gray;
-    -moz-border-radius: 4px;
-    border-radius: 4px;
-    margin: 6px 0 0 4px;
-    padding: 5px;
-    background-color: #FFF;
+  border: 1px solid gray;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  margin: 6px 0 0 4px;
+  padding: 10px 10px 10px 10px;
+  background-color:rgb(229,229,219);
 }
 .postdisplayname {
-    display: inline-block;
+  display: inline-block;
 }
 .postdisplayname a{
-    color:rgb(0,31,68);
+  color:rgb(0,31,68);
 }
 .posttime{
-    float: right;
-    text-align: right;
+  float: right;
+  text-align: right;
 }
 .postprofileimg{
-    width: 35px;
-    margin: 5px;
-    float: left;
+  width: 35px;
+  margin: 5px;
+  float: left;
 }
 .postprofileimg img{
-    width: 35px;
-    height: 35px;
-    background-color: #FF0000;
+  width: 35px;
+  height: 35px;
 }
 .postcontent {
-    width: 90%;
-    margin: 0 0 12px 0;
-    background-color: #c8d9ed;
-    -moz-border-radius: 4px;
-    border-radius: 4px;
-    padding: 5px;
+  margin: 0 0 12px 0;
+  background-color: #001f44;
+  border:2px inset black;
+  -moz-border-radius: 4px;
+  color:#FFF;
+  border-radius: 4px;
+  padding: 5px;
 }
 
-.postNstuff{
-	position:relative;
-	margin-left:190px;/* do the math with leftbar */
-	width:650px;
-	height: auto;
-	margin-bottom:10px;
-	padding-bottom:10px;
-	border: 1px solid gray;
-    border-radius: 4px 4px 4px 4px;
-    
+.postnstuff{
+  position:relative;
+  margin-left:190px;/* do the math with leftbar */
+  width:650px;
+  height: auto;
+  margin-bottom:10px;
+  padding-bottom:10px;
+  border: 1px solid gray;
+  border-radius: 4px 4px 4px 4px;
+
 }
 .postNstuff .name{
-	font-size:17px;
-	font-weight:bold;
+  font-size:17px;
+  font-weight:bold;
 }
 .postNstuff .post{margin-left:25px;}
 .postNstuff .picture{
-	float:left;
-	margin:2px 5px 2px 2px;
-	background-color:transparent;
-	}
-.postNstuff .tools{
-	color: blue;
-	margin:-18px 5px 5px 0px;/* math trick with home.php */
-	float:right;
-	font-weight:bold;
+  float:left;
+  margin:2px 5px 2px 2px;
+  background-color:transparent;
 }
-
-
+.postNstuff .tools{
+  color: blue;
+  margin:-18px 5px 5px 0px;/* math trick with home.php */
+  float:right;
+  font-weight:bold;
+}
 .commentarea {
 }
 .comment {
-    background-color:#e5edb;
-    width: 90%;
-    border: 1px solid gray;
-    -moz-border-radius: 4px;
-    border-radius: 4px;
-    padding: 5px;
-    margin-left: 10px;
+  background-color:#c8d9ed;
+  /*width: 90%;*/
+  border: 1px solid gray;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
 }
 .commentform {
-    margin-top: 5px;
+  margin-top: 5px;
+  height:100%;
 }
 .commentform textarea {
-    width: 91%;
-    height: 80px;
-    -moz-border-radius: 4px;
-    border-radius: 4px;
+  width: 100%;
+  height: 80px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
 }
 .commentdisplayname {
-    display: inline-block;
+  display: inline-block;
 }
 .commentdisplayname h3 {
-    margin: 8px 0;
+  margin: 8px 0;
 }
 .commenttime{
-    float: right;
-    text-align: right;
+  float: right;
+  text-align: right;
 }
 .commentprofileimg{
-    width: 25px;
-    margin: 5px;
-    float: left;
+  width: 25px;
+  margin: 5px;
+  float: left;
 }
 .commentprofileimg img{
-    width: 25px;
-    height: 25px;
-    background-color: #FF0000;
+  width: 25px;
+  height: 25px;
 }
 .alert {
-    font-size: 20px;
-    padding: 10px;
-    background-color: pink;
-    position: fixed;
-    bottom: 40px;
-    right: 40px;
-    -moz-border-radius: 4px;
-    border-radius: 4px;
+  font-size: 20px;
+  padding: 10px;
+  background-color: pink;
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
 }
 #friendfinder {
-    display: inline-block;
-    vertical-align: bottom;
-    margin: 0;
-    position: relative;
-    bottom: 10px;
+  display: inline-block;
+  vertical-align: bottom;
+  margin: 0;
+  position: relative;
+  bottom: 10px;
 }
 #friendfinder input {
-    vertical-align: bottom;
-    -moz-border-radius: 4px;
-    border-radius: 4px;
+  vertical-align: bottom;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
 }
 .clear {
-    clear: both;
+  clear: both;
 }
 .underline {
   text-decoration:underline;

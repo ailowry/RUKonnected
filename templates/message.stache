@@ -1,7 +1,7 @@
-<div class="comment" msgid="{{MessageID}}">
-    <div class="commentprofileimg"><img src="{{pic}}" alt="avatar" name="userImage" width="24" height="24" style="background-color: #FF0000" /></div>
+<div class="mainpost" msgid="{{MessageID}}">
+    <div class="commentprofileimg"><img src="{{pic}}" alt="avatar" name="userImage" /></div>
     <div class="commentdisplayname msglink" userid="{{linkID}}">
       <h3>{{displayname}}</h3></div>
-    <div class="commenttime">{{Time}}</div>
-    <div class="commentcontent">{{Content}}</div>
+    <abbr class="posttime timeago">{{Time}}</abbr>
+    <div class="postcontent">{{Content}}</div>
 </div>            
