@@ -79,7 +79,8 @@ a {
 .UsersName{
  color: #3B5998;
   text-decoration: none;
-  font-size:20px;text-align:center;
+  font-size:20px;
+  text-align:center;
 }
 
 .rightbar{
@@ -94,7 +95,7 @@ a {
     border-radius: 4px;
     margin: 6px 0 0 4px;
     padding: 5px;
-    background-color: #FFEFEF;
+    background-color: #FFF;
 }
 .postdisplayname {
     display: inline-block;
@@ -119,7 +120,7 @@ a {
 .postcontent {
     width: 90%;
     margin: 0 0 12px 0;
-    background-color: #AAFFAA;
+    background-color: #c8d9ed;
     -moz-border-radius: 4px;
     border-radius: 4px;
     padding: 5px;
@@ -157,12 +158,13 @@ a {
 .commentarea {
 }
 .comment {
-    background-color: #EFDFDF;
+    background-color:#e5edb;
     width: 90%;
     border: 1px solid gray;
     -moz-border-radius: 4px;
     border-radius: 4px;
     padding: 5px;
+    margin-left: 10px;
 }
 .commentform {
     margin-top: 5px;
@@ -217,4 +219,7 @@ a {
 }
 .clear {
     clear: both;
+}
+.underline {
+  text-decoration:underline;
 }

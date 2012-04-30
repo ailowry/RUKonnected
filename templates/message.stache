@@ -1,20 +1,7 @@
-<div class="mainpost" msgid="{{MessageID}}">
-  <table>
-    <tr>
-      <td class="commentprofileimg">
-        <img src="{{pic}}" alt="avatar" name="userImage" />
-      </td>
-      <td class="commentdisplayname msglink" userid="{{LinkID}}">
-        <a><h3>{{displayname}}</h3></a>
-      </td>
-      <td class="commenttime">
-        <em>{{Time}}</em>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="4" class="commentcontent">
-        {{Content}}
-      </td>
-    </tr>
-  </table>
-</div>
+<div class="comment" msgid="{{MessageID}}">
+    <div class="commentprofileimg"><img src="{{pic}}" alt="avatar" name="userImage" width="24" height="24" style="background-color: #FF0000" /></div>
+    <div class="commentdisplayname msglink" userid="{{linkID}}">
+      <h3>{{displayname}}</h3></div>
+    <div class="commenttime">{{Time}}</div>
+    <div class="commentcontent">{{Content}}</div>
+</div>            
